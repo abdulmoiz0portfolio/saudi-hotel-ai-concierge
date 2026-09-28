@@ -128,6 +128,17 @@
       border-radius: 4px;
     }
 
+    /* Hide horizontal scrollbar completely while keeping scroll functionality */
+    .no-scrollbar::-webkit-scrollbar {
+      display: none !important;
+      height: 0px !important;
+      width: 0px !important;
+    }
+    .no-scrollbar {
+      -ms-overflow-style: none !important;
+      scrollbar-width: none !important;
+    }
+
     /* Shimmer Gold Gradient */
     @keyframes goldShimmer {
       0% { background-position: -200% 0; }
@@ -417,7 +428,7 @@
               </div>
 
               <!-- Quick Action Minimalist Prompt Pills -->
-              <div class="bg-whatsapp-dark/95 border-t border-white/5 px-2.5 py-1.5 flex items-center gap-1.5 overflow-x-auto chat-scroll z-20">
+              <div class="bg-whatsapp-dark/95 border-t border-white/5 px-2.5 py-1.5 flex items-center gap-1.5 overflow-x-auto no-scrollbar z-20">
                 <button onclick="sendQuickPrompt('Hi')" class="shrink-0 px-2.5 py-1 rounded-full bg-[#1f2c34] border border-white/10 hover:border-emerald-500/50 hover:bg-emerald-500/10 text-[10.5px] text-slate-200 transition-all font-sans">
                   Hi
                 </button>
@@ -436,7 +447,7 @@
               </div>
 
               <!-- WhatsApp Emoji Quick Picker Drawer (Hidden by default) -->
-              <div id="emojiDrawer" class="hidden bg-[#1f2c34] border-t border-white/10 px-3 py-2 flex items-center gap-2.5 overflow-x-auto chat-scroll z-20">
+              <div id="emojiDrawer" class="hidden bg-[#1f2c34] border-t border-white/10 px-3 py-2 flex items-center gap-2.5 overflow-x-auto no-scrollbar z-20">
                 <button onclick="insertEmoji('🇸🇦')" class="text-base hover:scale-125 transition-transform">🇸🇦</button>
                 <button onclick="insertEmoji('✨')" class="text-base hover:scale-125 transition-transform">✨</button>
                 <button onclick="insertEmoji('🏨')" class="text-base hover:scale-125 transition-transform">🏨</button>
@@ -1155,22 +1166,16 @@
               btnText: 'Confirm Classic Booking'
             }
           };
-        } else {
-          // Executive Suite (Default)
-          const rate = 950;
-          const base = rate * nights;
-          const vat = base * 0.15;
-          const total = base + vat;
+        } else if (text.includes('full') || text.includes('buyout') || text.includes('all rooms') || text.includes('entire')) {
           return {
-            text: `✨ *Executive VIP Suite Quotation* 🇸🇦\n\nYes available! Here is your custom reservation quotation:\n\n• **Category:** Executive Suite (VIP)\n• **Duration:** ${nights} Night(s)\n• **Rate:** 950 SAR / night\n• **Base Total:** ${base.toLocaleString()} SAR\n• **15% Saudi VAT:** ${vat.toLocaleString()} SAR\n• **Grand Total:** **${total.toLocaleString()} SAR**\n\n✨ *Included Privileges:*\n- Daily VIP Breakfast Buffet at Al-Nakheel\n- Full Executive Lounge Access & High Tea\n- Complimentary Valet Parking\n\nClick below to confirm your booking:`,
-            card: {
-              title: `Executive Suite • ${nights} Night(s)`,
-              price: `${total.toLocaleString()} SAR (Incl. 15% VAT)`,
-              nightlyRate: '950 SAR/night',
-              nights: `${nights} Night(s)`,
-              room: 'Executive Suite',
-              btnText: 'Confirm Executive Booking'
-            }
+            text: `🌟 *Full Hotel Buyout & Private Delegation Inquiry* 🇸🇦\n\nThank you for choosing The Royal Riyadh Grand Hotel & Suites.\n\nFor entire hotel buyouts, diplomatic delegations, or exclusive corporate events, our VIP Reservations Directorate provides comprehensive personalized proposals including all 180 luxury rooms & suites, private catering, conference halls, and 24/7 concierge security.\n\nTo prepare an official formal quotation, please specify:\n• **Expected Dates / Duration**\n• **Estimated Total Guests / Rooms required**\n• **Event or Dining requirements**\n\nOur Director of VIP Guest Relations will connect with you immediately! 👑`,
+            card: null
+          };
+        } else {
+          // General English Hospitality Concierge
+          return {
+            text: `🌟 *Welcome to The Royal Riyadh Grand Hotel & Suites 🇸🇦*\n\nIt is our absolute honor to assist you with pricing and reservations.\n\nOur luxury accommodation categories:\n1. **Classic Deluxe Room:** 550 SAR / night\n2. **Executive VIP Suite:** 950 SAR / night (Complimentary Executive Lounge & Breakfast)\n3. **Royal Presidential Suite:** 2,800 SAR / night (Dedicated Butler & Mercedes Chauffeur)\n\nPlease share your dates of stay and preferred room type to receive an instant detailed quotation with 15% VAT breakdown! ✨`,
+            card: null
           };
         }
       }
@@ -1290,9 +1295,16 @@
       }
 
       const lastUserMsg = window.lastUserMessageText || '';
+      
+      // Clear any outdated whatsapp endpoint from localStorage
       const savedWebhook = localStorage.getItem('sultan_n8n_webhook');
-      const webhookUrl = (savedWebhook && savedWebhook.trim().startsWith('http')) 
-        ? savedWebhook.trim() 
+      if (savedWebhook && savedWebhook.includes('saudi-hotel-whatsapp')) {
+        localStorage.removeItem('sultan_n8n_webhook');
+      }
+
+      const activeWebhook = localStorage.getItem('sultan_n8n_webhook');
+      const webhookUrl = (activeWebhook && activeWebhook.trim().startsWith('http') && !activeWebhook.includes('saudi-hotel-whatsapp')) 
+        ? activeWebhook.trim() 
         : DEFAULT_N8N_WEBHOOK;
 
       let replyText = '';
@@ -1320,7 +1332,15 @@
 
         if (resp.ok) {
           const data = await resp.json();
-          replyText = data.reply || data.output || data.message || (typeof data === 'string' ? data : JSON.stringify(data));
+          if (data && data.reply) {
+            replyText = data.reply;
+          } else if (data && data.output) {
+            replyText = data.output;
+          } else if (data && data.message && data.message !== 'Workflow was started') {
+            replyText = data.message;
+          } else {
+            throw new Error('Invalid response structure from n8n');
+          }
         } else {
           throw new Error('n8n returned HTTP status ' + resp.status);
         }
