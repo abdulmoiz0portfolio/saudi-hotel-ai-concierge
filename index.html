@@ -301,7 +301,7 @@
           <div class="titanium-frame shadow-phone-3d transition-transform duration-300 hover:scale-[1.01] relative">
             
             <!-- Phone Screen Inner Shell -->
-            <div class="relative w-full h-[710px] bg-whatsapp-dark rounded-[42px] overflow-hidden flex flex-col select-none text-left">
+            <div class="relative w-full h-[710px] bg-whatsapp-dark rounded-[42px] overflow-hidden flex flex-col select-none text-left" dir="ltr">
               
               <!-- Android Status Bar (Matching Image 3:51, Alarm, Battery 81%) -->
               <div class="h-8 bg-whatsapp-dark w-full px-5 flex items-center justify-between z-30 select-none text-slate-200 text-xs font-medium">
@@ -850,20 +850,9 @@
       }
     }
 
-    // Input changes (Switch Mic <-> Send button)
+    // Input changes
     function handleInputChange(input) {
-      const btnIcon = document.getElementById('actionBtnIcon');
-      const cameraBtn = document.getElementById('cameraBtn');
-      const hasText = input.value.trim().length > 0;
-
-      if (hasText) {
-        btnIcon.setAttribute('data-lucide', 'send');
-        cameraBtn.classList.add('hidden');
-      } else {
-        btnIcon.setAttribute('data-lucide', 'mic');
-        cameraBtn.classList.remove('hidden');
-      }
-      lucide.createIcons();
+      // Input typing handler
     }
 
     function handleInputKeydown(e) {
@@ -874,13 +863,7 @@
     }
 
     function handleActionBtnClick() {
-      const input = document.getElementById('userChatInput');
-      if (input.value.trim().length > 0) {
-        submitUserChat();
-      } else {
-        // Voice Note simulation
-        sendQuickPrompt('Hi');
-      }
+      submitUserChat();
     }
 
     // Insert Emoji into input
@@ -1085,13 +1068,17 @@
     // Helper: Show/Hide Typing Indicator
     function showTypingIndicator() {
       const typing = document.getElementById('typingIndicator');
-      typing.classList.remove('hidden');
+      if (typing) typing.classList.remove('hidden');
+      const headerStatus = document.getElementById('chatHeaderStatus');
+      if (headerStatus) headerStatus.innerText = 'typing...';
       scrollToChatBottom();
     }
 
     function hideTypingIndicator() {
       const typing = document.getElementById('typingIndicator');
-      typing.classList.add('hidden');
+      if (typing) typing.classList.add('hidden');
+      const headerStatus = document.getElementById('chatHeaderStatus');
+      if (headerStatus) headerStatus.innerText = 'فندق قصر الرياض 🇸🇦';
     }
 
     // Quick action prompt buttons
@@ -1289,53 +1276,64 @@
     const DEFAULT_N8N_WEBHOOK = 'https://n8n.bminternational.com.pk/webhook/saudi-hotel-chat';
     const GUEST_SESSION_ID = 'web_guest_' + Math.floor(Math.random() * 1000000);
 
-    // Trigger AI Reply with Realistic Delay & Direct n8n Connection
-    function triggerAIReply(forcedText = null) {
+    // Trigger AI Reply with Direct n8n Connection & Fallback
+    async function triggerAIReply(forcedText = null) {
       showTypingIndicator();
 
-      const webhookUrl = localStorage.getItem('sultan_n8n_webhook') || DEFAULT_N8N_WEBHOOK;
-
-      setTimeout(async () => {
-        if (forcedText) {
+      if (forcedText) {
+        setTimeout(() => {
           hideTypingIndicator();
           appendMessage('bot', forcedText);
           playReceiveSound();
-          return;
+        }, 600);
+        return;
+      }
+
+      const lastUserMsg = window.lastUserMessageText || '';
+      const savedWebhook = localStorage.getItem('sultan_n8n_webhook');
+      const webhookUrl = (savedWebhook && savedWebhook.trim().startsWith('http')) 
+        ? savedWebhook.trim() 
+        : DEFAULT_N8N_WEBHOOK;
+
+      let replyText = '';
+      let replyCard = null;
+
+      // 1. Direct Live Call to n8n Webhook
+      try {
+        const controller = new AbortController();
+        const timeoutId = setTimeout(() => controller.abort(), 14000);
+
+        const resp = await fetch(webhookUrl, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            'Accept': 'application/json'
+          },
+          body: JSON.stringify({
+            message: lastUserMsg,
+            text: lastUserMsg,
+            sessionId: GUEST_SESSION_ID
+          }),
+          signal: controller.signal
+        });
+        clearTimeout(timeoutId);
+
+        if (resp.ok) {
+          const data = await resp.json();
+          replyText = data.reply || data.output || data.message || (typeof data === 'string' ? data : JSON.stringify(data));
+        } else {
+          throw new Error('n8n returned HTTP status ' + resp.status);
         }
+      } catch (err) {
+        console.warn('n8n webhook error or timeout, falling back to smart calculation engine', err);
+        const fallback = calculateSmartAIReply(lastUserMsg);
+        replyText = fallback.text;
+        replyCard = fallback.card;
+      }
 
-        const lastUserMsg = window.lastUserMessageText || '';
-
-        // 1. Direct Live Call to n8n Webhook
-        if (webhookUrl && webhookUrl.startsWith('http')) {
-          try {
-            const resp = await fetch(webhookUrl, {
-              method: 'POST',
-              headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
-              body: JSON.stringify({
-                message: lastUserMsg,
-                text: lastUserMsg,
-                sessionId: GUEST_SESSION_ID
-              })
-            });
-            if (resp.ok) {
-              const data = await resp.json();
-              hideTypingIndicator();
-              const replyMsg = data.reply || data.output || data.message || (typeof data === 'string' ? data : JSON.stringify(data));
-              appendMessage('bot', replyMsg);
-              playReceiveSound();
-              return;
-            }
-          } catch (err) {
-            console.warn('n8n webhook error, using smart calculation engine fallback', err);
-          }
-        }
-
-        // 2. Smart Built-in Engine Fallback
-        hideTypingIndicator();
-        const reply = calculateSmartAIReply(lastUserMsg);
-        appendMessage('bot', reply.text, reply.card);
-        playReceiveSound();
-      }, 950);
+      hideTypingIndicator();
+      appendMessage('bot', replyText, replyCard);
+      playReceiveSound();
     }
 
     // Submit user message
@@ -1350,12 +1348,12 @@
       appendMessage('user', val);
       playSendSound();
       input.value = '';
-      handleInputChange(input);
 
       // Close open drawer
-      document.getElementById('emojiDrawer').classList.add('hidden');
+      const emojiDrawer = document.getElementById('emojiDrawer');
+      if (emojiDrawer) emojiDrawer.classList.add('hidden');
 
-      // 2. Trigger AI response
+      // 2. Trigger AI response directly
       triggerAIReply();
     }
 
