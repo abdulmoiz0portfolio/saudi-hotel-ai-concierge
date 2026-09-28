@@ -411,9 +411,6 @@
                     <div class="text-xs leading-relaxed text-slate-200" id="enteringMessageBody" dir="auto">
                       <p>Greetings</p>
                     </div>
-                    <div class="flex items-center justify-end pt-0.5 text-[10px] text-[#8696A0] font-mono" id="enteringMsgTime">
-                      3:51 AM
-                    </div>
                   </div>
 
                   <!-- WhatsApp Action Icons Row Below Bubble (Copy, Share, Thumbs up, Thumbs down) -->
@@ -509,22 +506,17 @@
                   <button type="button" onclick="sendQuickPrompt('أريد الاطلاع على كتالوج صور الغرف والأسعار')" class="text-[#8696A0] hover:text-white transition-colors shrink-0" title="مرفقات">
                     <i data-lucide="paperclip" class="w-5 h-5"></i>
                   </button>
-
-                  <!-- Camera Button (Visible when empty) -->
-                  <button type="button" id="cameraBtn" onclick="simulateCameraSend()" class="text-[#8696A0] hover:text-white transition-colors shrink-0" title="كاميرا">
-                    <i data-lucide="camera" class="w-5 h-5"></i>
-                  </button>
                 </div>
 
-                <!-- Floating Mic / Send Button (WhatsApp Green Circular Action Button #25D366 matching image) -->
+                <!-- Dedicated Send Button (WhatsApp Green Circular Action Button #25D366 matching image) -->
                 <button 
                   type="button" 
                   id="actionSendBtn" 
-                  onclick="handleActionBtnClick()"
+                  onclick="submitUserChat()"
                   class="w-11 h-11 rounded-full bg-whatsapp-whatsappGreen hover:bg-emerald-500 text-black flex items-center justify-center transition-all duration-200 active:scale-90 shadow-md shrink-0 font-bold"
-                  title="إرسال رسالة"
+                  title="إرسال"
                 >
-                  <i id="actionBtnIcon" data-lucide="mic" class="w-5 h-5 text-black fill-black"></i>
+                  <i data-lucide="send" class="w-5 h-5 text-black fill-black ml-0.5"></i>
                 </button>
               </div>
 
@@ -1045,14 +1037,13 @@
         msgDiv.innerHTML = `
           <div class="bg-whatsapp-outgoing bubble-outgoing text-white rounded-2xl p-2.5 max-w-[85%] border border-white/5 shadow-whatsapp-bubble space-y-1">
             <p class="text-xs leading-relaxed" dir="auto">${formattedHTML}</p>
-            <div class="flex items-center justify-end gap-1 text-[10px] text-[#8696A0] pt-0.5">
-              <span class="font-mono text-[9.5px] text-emerald-200/90">${timeStr}</span>
+            <div class="flex items-center justify-end text-[10px] text-[#8696A0] pt-0.5">
               <span class="text-whatsapp-check font-bold tracking-tighter text-[11px]">✓✓</span>
             </div>
           </div>
         `;
       } else {
-        // AI Message Matching Screenshot: "Ai Chatbot:" bold label at top, then content, timestamp, action bar below
+        // AI Message Matching Screenshot: "Ai Chatbot:" bold label at top, then content, action bar below
         let bubbleContent = `
           <div class="bg-whatsapp-incoming bubble-incoming text-slate-100 rounded-2xl p-3 max-w-[86%] border border-white/5 shadow-whatsapp-bubble space-y-1.5">
             <div class="text-xs font-bold text-slate-100 tracking-tight">
@@ -1096,9 +1087,6 @@
         }
 
         bubbleContent += `
-            <div class="flex items-center justify-end pt-0.5 text-[10px] text-[#8696A0] font-mono">
-              <span>${timeStr}</span>
-            </div>
           </div>
 
           <!-- Action bar below bubble (Copy, Share, Like, Dislike) -->
@@ -1345,16 +1333,19 @@
       };
     }
 
-    // Trigger AI Reply with Realistic Delay
+    // Default live n8n webhook URL created by automation
+    const DEFAULT_N8N_WEBHOOK = 'https://n8n.bminternational.com.pk/webhook/saudi-hotel-chat';
+    const GUEST_SESSION_ID = 'web_guest_' + Math.floor(Math.random() * 1000000);
+
+    // Trigger AI Reply with Realistic Delay & Direct n8n Connection
     function triggerAIReply(forcedText = null) {
       showTypingIndicator();
 
-      const webhookUrl = localStorage.getItem('sultan_n8n_webhook');
+      const webhookUrl = localStorage.getItem('sultan_n8n_webhook') || DEFAULT_N8N_WEBHOOK;
 
       setTimeout(async () => {
-        hideTypingIndicator();
-
         if (forcedText) {
+          hideTypingIndicator();
           appendMessage('bot', forcedText);
           playReceiveSound();
           return;
@@ -1362,31 +1353,33 @@
 
         const lastUserMsg = window.lastUserMessageText || '';
 
-        // If user configured a live n8n webhook on VPS
+        // 1. Direct Live Call to n8n Webhook
         if (webhookUrl && webhookUrl.startsWith('http')) {
           try {
             const resp = await fetch(webhookUrl, {
               method: 'POST',
-              headers: { 'Content-Type': 'application/json' },
+              headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
               body: JSON.stringify({
                 message: lastUserMsg,
-                from: 'whatsapp_web_simulator',
-                senderName: 'النزيل الكريم'
+                text: lastUserMsg,
+                sessionId: GUEST_SESSION_ID
               })
             });
             if (resp.ok) {
               const data = await resp.json();
-              const replyMsg = data.reply || data.output || data.message || JSON.stringify(data);
+              hideTypingIndicator();
+              const replyMsg = data.reply || data.output || data.message || (typeof data === 'string' ? data : JSON.stringify(data));
               appendMessage('bot', replyMsg);
               playReceiveSound();
               return;
             }
           } catch (err) {
-            console.warn('n8n webhook error, falling back to smart engine', err);
+            console.warn('n8n webhook error, using smart calculation engine fallback', err);
           }
         }
 
-        // Smart Built-in Engine
+        // 2. Smart Built-in Engine Fallback
+        hideTypingIndicator();
         const reply = calculateSmartAIReply(lastUserMsg);
         appendMessage('bot', reply.text, reply.card);
         playReceiveSound();
@@ -1413,6 +1406,31 @@
       // 2. Trigger AI response
       triggerAIReply();
     }
+
+    // Opening Live Typing Simulation: Shows typing indicator first, then reveals Greetings!
+    document.addEventListener('DOMContentLoaded', () => {
+      const enteringMsg = document.getElementById('initialEnteringMessage');
+      const typingIndicator = document.getElementById('typingIndicator');
+      const headerStatus = document.getElementById('chatHeaderStatus');
+
+      if (enteringMsg && typingIndicator) {
+        enteringMsg.classList.add('hidden');
+        typingIndicator.classList.remove('hidden');
+        if (headerStatus) {
+          headerStatus.innerText = 'Ai Chatbot typing...';
+        }
+
+        setTimeout(() => {
+          typingIndicator.classList.add('hidden');
+          enteringMsg.classList.remove('hidden');
+          enteringMsg.classList.add('animate-msg');
+          if (headerStatus) {
+            headerStatus.innerText = 'فندق قصر الرياض 🇸🇦';
+          }
+          playReceiveSound();
+        }, 1500);
+      }
+    });
   </script>
 </body>
 </html>
