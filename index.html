@@ -339,7 +339,7 @@
                   <!-- Chat Title & Official Verified Blue Checkmark -->
                   <div class="text-left cursor-pointer" onclick="openHotelProfile()">
                     <div class="flex items-center gap-1.5">
-                      <span id="headerChatName" class="font-bold text-sm text-slate-100 tracking-tight">Meta AI</span>
+                      <span id="headerChatName" class="font-bold text-sm text-slate-100 tracking-tight">Ai Chatbot</span>
                       <!-- Verified Blue Badge (Matching Screenshot) -->
                       <div class="w-4 h-4 rounded-full bg-[#1877F2] flex items-center justify-center text-[10px] text-white shadow-sm font-bold">
                         ✓
@@ -406,11 +406,10 @@
                   <div class="bg-whatsapp-incoming bubble-incoming rounded-2xl p-3 max-w-[85%] border border-white/5 shadow-whatsapp-bubble space-y-1.5 text-slate-100">
                     <!-- Bold Sender Tag matching image -->
                     <div id="chatLabelTag" class="text-xs font-bold text-slate-100 tracking-tight">
-                      Meta AI:
+                      Ai Chatbot:
                     </div>
-                    <div class="text-xs leading-relaxed text-slate-200 space-y-1" id="enteringMessageBody" dir="auto">
-                      <p>أهلاً وسهلاً بك في <strong class="text-gold-400">فندق قصر الرياض الفاخر</strong> 🇸🇦✨</p>
-                      <p class="text-slate-300 text-[11.5px]">يسعدني تزويدك بعروض الأسعار الرسمية للغرف والأجنحة، وحساب إجمالي الليالي مع ضريبة القيمة المضافة 15% فورياً. كيف يمكنني خدمتك اليوم؟</p>
+                    <div class="text-xs leading-relaxed text-slate-200" id="enteringMessageBody" dir="auto">
+                      <p>Greetings</p>
                     </div>
                     <div class="flex items-center justify-end pt-0.5 text-[10px] text-[#8696A0] font-mono" id="enteringMsgTime">
                       3:51 AM
@@ -443,7 +442,7 @@
                     <div class="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-bounce" style="animation-delay: 0s"></div>
                     <div class="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-bounce" style="animation-delay: 0.2s"></div>
                     <div class="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-bounce" style="animation-delay: 0.4s"></div>
-                    <span class="text-[10px] text-[#8696A0] ml-1 font-mono">Meta AI typing...</span>
+                    <span class="text-[10px] text-[#8696A0] ml-1 font-mono">Ai Chatbot typing...</span>
                   </div>
                 </div>
 
@@ -982,7 +981,7 @@
     function copyMsgText(type, customText = '') {
       let copyContent = customText;
       if (type === 'welcome') {
-        copyContent = "أهلاً وسهلاً بك في فندق قصر الرياض الفاخر 🇸🇦✨ يسرنا تزويدك بعروض الأسعار وحساب إجمالي الليالي مع ضريبة القيمة المضافة 15% فورياً.";
+        copyContent = "Greetings";
       }
       navigator.clipboard.writeText(copyContent).then(() => {
         showToast('تم نسخ نص الرسالة بنجاح! 📋');
@@ -1053,11 +1052,11 @@
           </div>
         `;
       } else {
-        // AI Message Matching Screenshot: "Meta AI:" bold label at top, then content, timestamp, action bar below
+        // AI Message Matching Screenshot: "Ai Chatbot:" bold label at top, then content, timestamp, action bar below
         let bubbleContent = `
           <div class="bg-whatsapp-incoming bubble-incoming text-slate-100 rounded-2xl p-3 max-w-[86%] border border-white/5 shadow-whatsapp-bubble space-y-1.5">
             <div class="text-xs font-bold text-slate-100 tracking-tight">
-              Meta AI:
+              Ai Chatbot:
             </div>
             <div class="text-xs leading-relaxed text-slate-200" dir="auto">
               ${formattedHTML}
