@@ -1,0 +1,405 @@
+{
+  "id": "MAKlS8xuLn1lXD1C",
+  "name": "Saudi Arabia Hotel WhatsApp AI Concierge (Pricing & Booking)",
+  "description": null,
+  "active": true,
+  "activeVersionId": "e59b7fa2-753a-4843-92ac-60178fd58a3e",
+  "createdAt": "2026-09-28T16:56:18.251Z",
+  "updatedAt": "2026-09-28T17:23:16.465Z",
+  "isArchived": false,
+  "versionId": "e59b7fa2-753a-4843-92ac-60178fd58a3e",
+  "versionCounter": 5,
+  "sourceWorkflowId": null,
+  "triggerCount": 1,
+  "nodes": [
+    {
+      "id": "hotel-wh-trigger",
+      "name": "Webhook: Inbound WhatsApp (Saudi Hotel)",
+      "webhookId": "saudi-hotel-whatsapp-webhook",
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2,
+      "position": [
+        -500,
+        300
+      ],
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "saudi-hotel-whatsapp",
+        "options": {}
+      }
+    },
+    {
+      "id": "hotel-filter-parse",
+      "name": "Filter & Parse WhatsApp Message",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        -240,
+        300
+      ],
+      "parameters": {
+        "jsCode": "const body = $input.first().json.body || $input.first().json;\n\n// 1. Support Evolution API format\nif (body.event && !body.event.toLowerCase().includes(\"messages.upsert\")) {\n  return [];\n}\n\nconst data = body.data || {};\nconst key = data.key || {};\n\n// Ignore bot's own sent messages\nif (key.fromMe === true) {\n  return [];\n}\n\n// Extract Raw Message Text\nlet rawText = \"\";\nconst msg = data.message || {};\n\nif (msg.conversation) {\n  rawText = msg.conversation;\n} else if (msg.extendedTextMessage?.text) {\n  rawText = msg.extendedTextMessage.text;\n} else if (msg.imageMessage?.caption) {\n  rawText = msg.imageMessage.caption;\n} else if (msg.buttonsResponseMessage?.selectedDisplayText) {\n  rawText = msg.buttonsResponseMessage.selectedDisplayText;\n} else if (msg.listResponseMessage?.title) {\n  rawText = msg.listResponseMessage.title;\n} else if (typeof body.message === 'string') {\n  rawText = body.message;\n}\n\nif (!rawText || !rawText.trim()) {\n  return [];\n}\n\nconst remoteJid = key.remoteJid || body.from || \"\";\n\n// Ignore group chats and broadcast channels\nif (remoteJid.endsWith(\"@g.us\") || remoteJid.includes(\"status@broadcast\")) {\n  return [];\n}\n\n// Extract Clean Phone Number\nconst number = remoteJid.replace(\"@s.whatsapp.net\", \"\").replace(\"@lid\", \"\").replace(/[^0-9]/g, \"\");\nconst senderName = data.pushName || body.pushName || \"\u0627\u0644\u0636\u064a\u0641 \u0627\u0644\u0643\u0631\u064a\u0645 / Valued Guest\";\nconst instance = body.instance || \"automatixes\";\n\nreturn [{\n  json: {\n    instance,\n    remoteJid,\n    number,\n    sessionId: number,\n    senderName,\n    rawText: rawText.trim(),\n    messageId: key.id || Date.now(),\n    timestamp: data.messageTimestamp || Date.now()\n  }\n}];"
+      }
+    },
+    {
+      "id": "hotel-ai-agent",
+      "name": "Saudi Hotel AI Concierge",
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "typeVersion": 1.7,
+      "position": [
+        40,
+        300
+      ],
+      "parameters": {
+        "promptType": "define",
+        "text": "=\u0627\u0633\u0645 \u0627\u0644\u0636\u064a\u0641 (Guest Name): {{ $json.senderName }}\n\u0631\u0642\u0645 \u0627\u0644\u0648\u0627\u062a\u0633\u0627\u0628 (WhatsApp Number): +{{ $json.number }}\n\u0627\u0644\u0631\u0633\u0627\u0644\u0629 (Incoming Message): {{ $json.rawText }}",
+        "options": {
+          "systemMessage": "# IDENTITY & ROLE\n\u0623\u0646\u062a \"\u0633\u0644\u0637\u0627\u0646\"\u060c \u0627\u0644\u0645\u0633\u0627\u0639\u062f \u0627\u0644\u0630\u0643\u064a \u0648\u062e\u062f\u0645\u0629 \u0627\u0644\u0646\u0632\u0644\u0627\u0621 \u0627\u0644\u0627\u0641\u062a\u0631\u0627\u0636\u064a\u0629 \u0644\u0641\u0646\u062f\u0642 \"\u0642\u0635\u0631 \u0627\u0644\u0631\u064a\u0627\u0636 \u0627\u0644\u0641\u0627\u062e\u0631\" (The Royal Riyadh Grand Hotel & Suites) \u0641\u064a \u0627\u0644\u0645\u0645\u0644\u0643\u0629 \u0627\u0644\u0639\u0631\u0628\u064a\u0629 \u0627\u0644\u0633\u0639\u0648\u062f\u064a\u0629 \ud83c\uddf8\ud83c\udde6.\n\u0623\u0646\u062a \u062a\u0645\u062b\u0644 \u0643\u0631\u0645 \u0627\u0644\u0636\u064a\u0627\u0641\u0629 \u0627\u0644\u0633\u0639\u0648\u062f\u064a\u0629 \u0627\u0644\u0623\u0635\u064a\u0644\u0629\u060c \u0648\u062a\u062a\u062d\u062f\u062b \u0628\u0623\u0633\u0644\u0648\u0628 \u0631\u0627\u0642\u064d\u060c \u0645\u0647\u0630\u0628\u060c \u0645\u0631\u062d\u0628\u060c \u0648\u0645\u062d\u062a\u0631\u0641 \u062c\u062f\u0627\u064b.\n\n# LINGUISTIC RULES (\u0642\u0648\u0627\u0639\u062f \u0627\u0644\u0644\u063a\u0629 - \u0645\u0647\u0645\u0629 \u062c\u062f\u0627\u064b)\n1. DEFAULT LANGUAGE IS ARABIC (\u0627\u0644\u0644\u063a\u0629 \u0627\u0644\u0627\u0641\u062a\u0631\u0627\u0636\u064a\u0629 \u0647\u064a \u0627\u0644\u0639\u0631\u0628\u064a\u0629):\n   - \u062f\u0627\u0626\u0645\u0627\u064b \u0627\u0628\u062f\u0623 \u0627\u0644\u062a\u0631\u062d\u064a\u0628 \u0628\u0627\u0644\u0644\u063a\u0629 \u0627\u0644\u0639\u0631\u0628\u064a\u0629 \u0628\u0639\u0628\u0627\u0631\u0627\u062a \u0627\u0644\u0636\u064a\u0627\u0641\u0629 \u0627\u0644\u0633\u0639\u0648\u062f\u064a\u0629 \u0627\u0644\u0631\u0627\u0642\u064a\u0629: \"\u0623\u0647\u0644\u0627\u064b \u0648\u0633\u0647\u0644\u0627\u064b \u0628\u0643\u060c \u062d\u064a\u0627\u0643 \u0627\u0644\u0644\u0647 \u0641\u064a \u0641\u0646\u062f\u0642 \u0642\u0635\u0631 \u0627\u0644\u0631\u064a\u0627\u0636 \u0627\u0644\u0641\u0627\u062e\u0631 \ud83c\uddf8\ud83c\udde6 \u064a\u0633\u0639\u062f\u0646\u0627 \u0648\u064a\u0634\u0631\u0641\u0646\u0627 \u062e\u062f\u0645\u062a\u0643.\"\n2. BILINGUAL SUPPORT (\u062f\u0639\u0645 \u0627\u0644\u0625\u0646\u062c\u0644\u064a\u0632\u064a\u0629):\n   - \u0625\u0630\u0627 \u0643\u062a\u0628 \u0627\u0644\u0636\u064a\u0641 \u0628\u0627\u0644\u0644\u063a\u0629 \u0627\u0644\u0625\u0646\u062c\u0644\u064a\u0632\u064a\u0629 \u0623\u0648 \u0637\u0644\u0628 \u0627\u0644\u062a\u062d\u062f\u062b \u0628\u0627\u0644\u0625\u0646\u062c\u0644\u064a\u0632\u064a\u0629\u060c \u062d\u0648\u0651\u0644 \u0641\u0648\u0631\u0627\u064b \u0648\u0623\u062c\u0628 \u0628\u0627\u0644\u0644\u063a\u0629 \u0627\u0644\u0625\u0646\u062c\u0644\u064a\u0632\u064a\u0629 \u0628\u0637\u0644\u0627\u0642\u0629 \u0648\u0623\u0633\u0644\u0648\u0628 \u0636\u064a\u0627\u0641\u0629 \u0641\u0646\u062f\u0642\u064a\u0629 5 \u0646\u062c\u0648\u0645.\n3. CONCISENESS (\u0627\u0644\u0625\u064a\u062c\u0627\u0632 \u0648\u0627\u0644\u0648\u0636\u0648\u062d):\n   - \u0631\u0633\u0627\u0626\u0644 \u0627\u0644\u0648\u0627\u062a\u0633\u0627\u0628 \u064a\u062c\u0628 \u0623\u0646 \u062a\u0643\u0648\u0646 \u0648\u0627\u0636\u062d\u0629\u060c \u0623\u0646\u064a\u0642\u0629\u060c \u0645\u0646\u0633\u0642\u0629 \u0628\u0646\u0642\u0627\u0637 \u0648\u0625\u064a\u0645\u0648\u062c\u064a \u0631\u0627\u0642\u064a\u0629\u060c \u0648\u0628\u062f\u0648\u0646 \u0625\u0637\u0627\u0644\u0629 \u0645\u0645\u0644\u0629.\n\n# HOTEL PRICING & ROOM CATALOG (\u0623\u0633\u0639\u0627\u0631 \u0627\u0644\u063a\u0631\u0641 \u0648\u0627\u0644\u062e\u062f\u0645\u0627\u062a)\n\u0627\u0644\u0639\u0645\u0644\u0629 \u0627\u0644\u0631\u0633\u0645\u064a\u0629: \u0627\u0644\u0631\u064a\u0627\u0644 \u0627\u0644\u0633\u0639\u0648\u062f\u064a (SAR / \u0631.\u0633) - \u0627\u0644\u0623\u0633\u0639\u0627\u0631 \u062a\u0634\u0645\u0644 \u0636\u0631\u064a\u0628\u0629 \u0627\u0644\u0642\u064a\u0645\u0629 \u0627\u0644\u0645\u0636\u0627\u0641\u0629 15%:\n\n1. \u0627\u0644\u063a\u0631\u0641\u0629 \u0627\u0644\u0643\u0644\u0627\u0633\u064a\u0643\u064a\u0629 \u0627\u0644\u0641\u0627\u062e\u0631\u0629 (Deluxe Room):\n   - \u0627\u0644\u0633\u0639\u0631: 550 \u0631.\u0633 / \u0627\u0644\u0644\u064a\u0644\u0629\n   - \u0627\u0644\u0633\u0639\u0629: \u0634\u062e\u0635\u064a\u0646 \u0628\u0627\u0644\u063a\u064a\u0646\n   - \u0627\u0644\u0645\u0632\u0627\u064a\u0627: \u0633\u0631\u064a\u0631 \u0643\u064a\u0646\u063a \u0623\u0648 \u0633\u0631\u064a\u0631\u064a\u0646 \u0645\u0646\u0641\u0635\u0644\u064a\u0646\u060c \u0625\u0637\u0644\u0627\u0644\u0629 \u0639\u0644\u0649 \u0627\u0644\u0645\u062f\u064a\u0646\u0629\u060c \u0648\u0627\u064a \u0641\u0627\u064a \u0641\u0627\u0626\u0642 \u0627\u0644\u0633\u0631\u0639\u0629\u060c \u0622\u0644\u0629 \u062a\u062d\u0636\u064a\u0631 \u0642\u0647\u0648\u0629 \u0646\u0633\u0628\u0631\u064a\u0633\u0648.\n\n2. \u0627\u0644\u062c\u0646\u0627\u062d \u0627\u0644\u062a\u0646\u0641\u064a\u0630\u064a (Executive Suite):\n   - \u0627\u0644\u0633\u0639\u0631: 950 \u0631.\u0633 / \u0627\u0644\u0644\u064a\u0644\u0629\n   - \u0627\u0644\u0633\u0639\u0629: \u0634\u062e\u0635\u064a\u0646 \u0628\u0627\u0644\u063a\u064a\u0646 + \u0637\u0641\u0644\n   - \u0627\u0644\u0645\u0632\u0627\u064a\u0627: \u0635\u0627\u0644\u0629 \u0645\u0639\u064a\u0634\u0629 \u0645\u0633\u062a\u0642\u0644\u0629\u060c \u062f\u062e\u0648\u0644 \u0645\u062c\u0627\u0646\u064a \u0644\u0644\u0635\u0627\u0644\u0629 \u0627\u0644\u062a\u0646\u0641\u064a\u0630\u064a\u0629 (Executive Lounge)\u060c \u0625\u0641\u0637\u0627\u0631 \u0628\u0648\u0641\u064a\u0647 \u0645\u062c\u0627\u0646\u064a\u060c \u0645\u0648\u0627\u0642\u0641 \u0633\u064a\u0627\u0631\u0627\u062a \u062e\u0627\u0635\u0629.\n\n3. \u0627\u0644\u062c\u0646\u0627\u062d \u0627\u0644\u0645\u0644\u0643\u064a \u0627\u0644\u0641\u0627\u062e\u0631 (Royal Presidential Suite):\n   - \u0627\u0644\u0633\u0639\u0631: 2,800 \u0631.\u0633 / \u0627\u0644\u0644\u064a\u0644\u0629\n   - \u0627\u0644\u0633\u0639\u0629: 4 \u0623\u0634\u062e\u0627\u0635\n   - \u0627\u0644\u0645\u0632\u0627\u064a\u0627: \u0625\u0637\u0644\u0627\u0644\u0629 \u0628\u0627\u0646\u0648\u0631\u0627\u0645\u064a\u0629 \u0643\u0627\u0645\u0644\u0629 \u0639\u0644\u0649 \u0627\u0644\u0631\u064a\u0627\u0636\u060c \u062c\u0627\u0643\u0648\u0632\u064a \u062e\u0627\u0635\u060c \u062e\u062f\u0645\u0629 \u0627\u0644\u0645\u0633\u0627\u0639\u062f \u0627\u0644\u0634\u062e\u0635\u064a (Butler Service) 24/7\u060c \u0627\u0633\u062a\u0642\u0628\u0627\u0644 \u0648\u062a\u0648\u062f\u064a\u0639 \u0645\u062c\u0627\u0646\u064a \u0645\u0646 \u0645\u0637\u0627\u0631 \u0627\u0644\u0645\u0644\u0643 \u062e\u0627\u0644\u062f \u0627\u0644\u062f\u0648\u0644\u064a.\n\n* \u062e\u062f\u0645\u0627\u062a \u0625\u0636\u0627\u0641\u064a\u0629:\n- \u0628\u0648\u0641\u064a\u0647 \u0627\u0644\u0625\u0641\u0637\u0627\u0631 \u0627\u0644\u0641\u0627\u062e\u0631 (\u0645\u0637\u0639\u0645 \u0627\u0644\u0646\u062e\u064a\u0644): 95 \u0631.\u0633 \u0644\u0644\u0634\u062e\u0635 (\u0645\u062c\u0627\u0646\u064b\u0627 \u0644\u0644\u0623\u062c\u0646\u062d\u0629 \u0627\u0644\u062a\u0646\u0641\u064a\u0630\u064a\u0629 \u0648\u0627\u0644\u0645\u0644\u0643\u064a\u0629).\n- \u0633\u0631\u064a\u0631 \u0625\u0636\u0627\u0641\u064a: 120 \u0631.\u0633 / \u0627\u0644\u0644\u064a\u0644\u0629.\n- \u0648\u0642\u062a \u062a\u0633\u062c\u064a\u0644 \u0627\u0644\u0648\u0635\u0648\u0644: 2:00 \u0638\u0647\u0631\u0627\u064b | \u0648\u0642\u062a \u062a\u0633\u062c\u064a\u0644 \u0627\u0644\u0645\u063a\u0627\u062f\u0631\u0629: 12:00 \u0638\u0647\u0631\u0627\u064b.\n\n# QUOTATION GENERATION WORKFLOW (\u0622\u0644\u064a\u0629 \u062a\u0642\u062f\u064a\u0645 \u0639\u0631\u0648\u0636 \u0627\u0644\u0623\u0633\u0639\u0627\u0631)\n\u0639\u0646\u062f\u0645\u0627 \u064a\u0637\u0644\u0628 \u0627\u0644\u0639\u0645\u064a\u0644 \u0639\u0631\u0636 \u0633\u0639\u0631 \u0623\u0648 \u062d\u062c\u0632:\n1. \u0627\u0637\u0644\u0628 \u0628\u0644\u0628\u0627\u0642\u0629 \u0627\u0644\u0645\u0639\u0644\u0648\u0645\u0627\u062a \u0627\u0644\u0623\u0633\u0627\u0633\u064a\u0629 \u0625\u0646 \u0644\u0645 \u064a\u0630\u0643\u0631\u0647\u0627:\n   - \u062a\u0627\u0631\u064a\u062e \u0627\u0644\u0648\u0635\u0648\u0644 \u0648\u0627\u0644\u0645\u063a\u0627\u062f\u0631\u0629 (\u0623\u0648 \u0639\u062f\u062f \u0627\u0644\u0644\u064a\u0627\u0644\u064a).\n   - \u0639\u062f\u062f \u0627\u0644\u0636\u064a\u0648\u0641 (\u0627\u0644\u0628\u0627\u0644\u063a\u064a\u0646 \u0648\u0627\u0644\u0623\u0637\u0641\u0627\u0644).\n   - \u0646\u0648\u0639 \u0627\u0644\u063a\u0631\u0641\u0629 \u0627\u0644\u0645\u0641\u0636\u0644.\n2. \u0627\u062d\u0633\u0628 \u0627\u0644\u0633\u0639\u0631 \u0627\u0644\u0625\u062c\u0645\u0627\u0644\u064a \u0648\u0642\u062f\u0645 \u0639\u0631\u0636 \u0633\u0639\u0631 \u0645\u0646\u0633\u0642 \u0648\u0623\u0646\u064a\u0642:\n   \u0645\u062b\u0627\u0644:\n   \ud83d\udccb *\u0639\u0631\u0636 \u0633\u0639\u0631 \u0627\u0644\u0625\u0642\u0627\u0645\u0629 - \u0641\u0646\u062f\u0642 \u0642\u0635\u0631 \u0627\u0644\u0631\u064a\u0627\u0636 \u0627\u0644\u0641\u0627\u062e\u0631*\n   - \u0646\u0648\u0639 \u0627\u0644\u063a\u0631\u0641\u0629: \u0627\u0644\u062c\u0646\u0627\u062d \u0627\u0644\u062a\u0646\u0641\u064a\u0630\u064a\n   - \u0645\u062f\u0629 \u0627\u0644\u0625\u0642\u0627\u0645\u0629: 3 \u0644\u064a\u0627\u0644\u064d (\u0645\u0646 10 \u0623\u0643\u062a\u0648\u0628\u0631 \u0625\u0644\u0649 13 \u0623\u0643\u062a\u0648\u0628\u0631)\n   - \u0639\u062f\u062f \u0627\u0644\u0646\u0632\u0644\u0627\u0621: 2 \u0628\u0627\u0644\u063a\u064a\u0646\n   - \u0627\u0644\u0633\u0639\u0631 \u0644\u0644\u064a\u0644\u0629: 950 \u0631.\u0633\n   - *\u0627\u0644\u0625\u062c\u0645\u0627\u0644\u064a \u0634\u0627\u0645\u0644 \u0627\u0644\u0636\u0631\u064a\u0628\u0629 (15%): 2,850 \u0631.\u0633*\n   \u2728 *\u0627\u0644\u0645\u0632\u0627\u064a\u0627 \u0627\u0644\u0645\u062c\u0627\u0646\u064a\u0629:* \u0625\u0641\u0637\u0627\u0631 \u064a\u0648\u0645\u064a\u060c \u0645\u0648\u0627\u0642\u0641 \u062e\u0627\u0635\u0629\u060c \u062f\u062e\u0648\u0644 \u0627\u0644\u0635\u0627\u0644\u0629 \u0627\u0644\u062a\u0646\u0641\u064a\u0630\u064a\u0629.\n3. \u0644\u062a\u0623\u0643\u064a\u062f \u0627\u0644\u062d\u062c\u0632\u060c \u0627\u0637\u0644\u0628 \u0645\u0646 \u0627\u0644\u0639\u0645\u064a\u0644 \u062a\u0632\u0648\u064a\u062f\u0643 \u0628\u0640:\n   - \u0627\u0644\u0627\u0633\u0645 \u0627\u0644\u0643\u0631\u064a\u0645\n   - \u0644\u062a\u0623\u0643\u064a\u062f \u0627\u0644\u062d\u062c\u0632 \u0627\u0644\u0645\u0628\u062f\u0626\u064a \u0648\u0625\u0631\u0633\u0627\u0644 \u0631\u0627\u0628\u0637 \u0627\u0644\u062f\u0641\u0639 \u0627\u0644\u0622\u0645\u0646.\n   \u0648\u0639\u0646\u062f \u0627\u0633\u062a\u0644\u0627\u0645 \u0627\u0644\u0628\u064a\u0627\u0646\u0627\u062a \u0636\u0639 \u0641\u064a \u0646\u0647\u0627\u064a\u0629 \u0631\u062f\u0643 \u0627\u0644\u0639\u0644\u0627\u0645\u0629: [HOTEL_BOOKING_REQUESTED]\n\n# BOUNDARIES\n- \u0644\u0627 \u062a\u062e\u0631\u062c \u0639\u0646 \u0646\u0637\u0627\u0642 \u062e\u062f\u0645\u0627\u062a \u0627\u0644\u0641\u0646\u062f\u0642 \u0648\u062d\u062c\u0648\u0632\u0627\u062a \u0627\u0644\u063a\u0631\u0641 \u0648\u0627\u0644\u0645\u0637\u0627\u0639\u0645 \u0648\u0627\u0644\u0641\u0639\u0627\u0644\u064a\u0627\u062a \u062f\u0627\u062e\u0644 \u0627\u0644\u0641\u0646\u062f\u0642.\n- \u062a\u0639\u0627\u0645\u0644 \u062f\u0627\u0626\u0645\u0627\u064b \u0628\u062f\u0641\u0621 \u0648\u0644\u0628\u0627\u0642\u0629 \u062a\u0639\u0643\u0633 \u0627\u0644\u0648\u062c\u0647 \u0627\u0644\u0645\u0634\u0631\u0642 \u0644\u0644\u0645\u0645\u0644\u0643\u0629 \u0627\u0644\u0639\u0631\u0628\u064a\u0629 \u0627\u0644\u0633\u0639\u0648\u062f\u064a\u0629."
+        }
+      }
+    },
+    {
+      "id": "hotel-groq-model",
+      "name": "Groq Chat Model",
+      "type": "@n8n/n8n-nodes-langchain.lmChatGroq",
+      "typeVersion": 1,
+      "position": [
+        0,
+        500
+      ],
+      "parameters": {
+        "model": "openai/gpt-oss-120b",
+        "options": {}
+      },
+      "credentials": {
+        "groqApi": {
+          "id": "eqXfaQa5maXTQq8r",
+          "name": "Groq account"
+        }
+      }
+    },
+    {
+      "id": "hotel-memory",
+      "name": "Guest Conversation Memory",
+      "type": "@n8n/n8n-nodes-langchain.memoryBufferWindow",
+      "typeVersion": 1.3,
+      "position": [
+        140,
+        500
+      ],
+      "parameters": {
+        "sessionKey": "={{ $json.number }}",
+        "contextWindowLength": 15,
+        "sessionIdType": "customKey"
+      }
+    },
+    {
+      "id": "hotel-send-whatsapp",
+      "name": "Send WhatsApp Reply",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        360,
+        300
+      ],
+      "parameters": {
+        "method": "POST",
+        "url": "http://evolution_api:8080/message/sendText/automatixes",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "apikey",
+              "value": "D90BC5A8E4FAF6BF4A04DC62495A8CAF"
+            },
+            {
+              "name": "Content-Type",
+              "value": "application/json"
+            }
+          ]
+        },
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={\n  \"number\": \"={{ $('Filter & Parse WhatsApp Message').item.json.number }}\",\n  \"text\": {{ JSON.stringify($json.output.replace(\"[HOTEL_BOOKING_REQUESTED]\", \"\").trim()) }},\n  \"delay\": 1500,\n  \"linkPreview\": true\n}",
+        "options": {}
+      }
+    }
+  ],
+  "connections": {
+    "Webhook: Inbound WhatsApp (Saudi Hotel)": {
+      "main": [
+        [
+          {
+            "node": "Filter & Parse WhatsApp Message",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Filter & Parse WhatsApp Message": {
+      "main": [
+        [
+          {
+            "node": "Saudi Hotel AI Concierge",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Groq Chat Model": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "Saudi Hotel AI Concierge",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Guest Conversation Memory": {
+      "ai_memory": [
+        [
+          {
+            "node": "Saudi Hotel AI Concierge",
+            "type": "ai_memory",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Saudi Hotel AI Concierge": {
+      "main": [
+        [
+          {
+            "node": "Send WhatsApp Reply",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "nodeGroups": [],
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "staticData": null,
+  "pinData": null,
+  "meta": null,
+  "tags": [],
+  "shared": [
+    {
+      "role": "workflow:owner",
+      "workflowId": "MAKlS8xuLn1lXD1C",
+      "projectId": "VfzjZKB4XkclJqUv",
+      "project": {
+        "id": "VfzjZKB4XkclJqUv",
+        "name": "Abdul Moiz Baig <bobrober2323@gmail.com>",
+        "type": "personal",
+        "icon": null,
+        "description": null,
+        "customTelemetryTags": [],
+        "creatorId": "fe255b57-4d5f-447e-ba27-d6b13a62582c",
+        "createdAt": "2026-08-04T01:05:49.797Z",
+        "updatedAt": "2026-08-04T01:32:38.798Z"
+      },
+      "createdAt": "2026-09-28T16:56:18.264Z",
+      "updatedAt": "2026-09-28T16:56:18.264Z"
+    }
+  ],
+  "activeVersion": {
+    "versionId": "e59b7fa2-753a-4843-92ac-60178fd58a3e",
+    "workflowId": "MAKlS8xuLn1lXD1C",
+    "nodes": [
+      {
+        "id": "hotel-wh-trigger",
+        "name": "Webhook: Inbound WhatsApp (Saudi Hotel)",
+        "webhookId": "saudi-hotel-whatsapp-webhook",
+        "type": "n8n-nodes-base.webhook",
+        "typeVersion": 2,
+        "position": [
+          -500,
+          300
+        ],
+        "parameters": {
+          "httpMethod": "POST",
+          "path": "saudi-hotel-whatsapp",
+          "options": {}
+        }
+      },
+      {
+        "id": "hotel-filter-parse",
+        "name": "Filter & Parse WhatsApp Message",
+        "type": "n8n-nodes-base.code",
+        "typeVersion": 2,
+        "position": [
+          -240,
+          300
+        ],
+        "parameters": {
+          "jsCode": "const body = $input.first().json.body || $input.first().json;\n\n// 1. Support Evolution API format\nif (body.event && !body.event.toLowerCase().includes(\"messages.upsert\")) {\n  return [];\n}\n\nconst data = body.data || {};\nconst key = data.key || {};\n\n// Ignore bot's own sent messages\nif (key.fromMe === true) {\n  return [];\n}\n\n// Extract Raw Message Text\nlet rawText = \"\";\nconst msg = data.message || {};\n\nif (msg.conversation) {\n  rawText = msg.conversation;\n} else if (msg.extendedTextMessage?.text) {\n  rawText = msg.extendedTextMessage.text;\n} else if (msg.imageMessage?.caption) {\n  rawText = msg.imageMessage.caption;\n} else if (msg.buttonsResponseMessage?.selectedDisplayText) {\n  rawText = msg.buttonsResponseMessage.selectedDisplayText;\n} else if (msg.listResponseMessage?.title) {\n  rawText = msg.listResponseMessage.title;\n} else if (typeof body.message === 'string') {\n  rawText = body.message;\n}\n\nif (!rawText || !rawText.trim()) {\n  return [];\n}\n\nconst remoteJid = key.remoteJid || body.from || \"\";\n\n// Ignore group chats and broadcast channels\nif (remoteJid.endsWith(\"@g.us\") || remoteJid.includes(\"status@broadcast\")) {\n  return [];\n}\n\n// Extract Clean Phone Number\nconst number = remoteJid.replace(\"@s.whatsapp.net\", \"\").replace(\"@lid\", \"\").replace(/[^0-9]/g, \"\");\nconst senderName = data.pushName || body.pushName || \"\u0627\u0644\u0636\u064a\u0641 \u0627\u0644\u0643\u0631\u064a\u0645 / Valued Guest\";\nconst instance = body.instance || \"automatixes\";\n\nreturn [{\n  json: {\n    instance,\n    remoteJid,\n    number,\n    sessionId: number,\n    senderName,\n    rawText: rawText.trim(),\n    messageId: key.id || Date.now(),\n    timestamp: data.messageTimestamp || Date.now()\n  }\n}];"
+        }
+      },
+      {
+        "id": "hotel-ai-agent",
+        "name": "Saudi Hotel AI Concierge",
+        "type": "@n8n/n8n-nodes-langchain.agent",
+        "typeVersion": 1.7,
+        "position": [
+          40,
+          300
+        ],
+        "parameters": {
+          "promptType": "define",
+          "text": "=\u0627\u0633\u0645 \u0627\u0644\u0636\u064a\u0641 (Guest Name): {{ $json.senderName }}\n\u0631\u0642\u0645 \u0627\u0644\u0648\u0627\u062a\u0633\u0627\u0628 (WhatsApp Number): +{{ $json.number }}\n\u0627\u0644\u0631\u0633\u0627\u0644\u0629 (Incoming Message): {{ $json.rawText }}",
+          "options": {
+            "systemMessage": "# IDENTITY & ROLE\n\u0623\u0646\u062a \"\u0633\u0644\u0637\u0627\u0646\"\u060c \u0627\u0644\u0645\u0633\u0627\u0639\u062f \u0627\u0644\u0630\u0643\u064a \u0648\u062e\u062f\u0645\u0629 \u0627\u0644\u0646\u0632\u0644\u0627\u0621 \u0627\u0644\u0627\u0641\u062a\u0631\u0627\u0636\u064a\u0629 \u0644\u0641\u0646\u062f\u0642 \"\u0642\u0635\u0631 \u0627\u0644\u0631\u064a\u0627\u0636 \u0627\u0644\u0641\u0627\u062e\u0631\" (The Royal Riyadh Grand Hotel & Suites) \u0641\u064a \u0627\u0644\u0645\u0645\u0644\u0643\u0629 \u0627\u0644\u0639\u0631\u0628\u064a\u0629 \u0627\u0644\u0633\u0639\u0648\u062f\u064a\u0629 \ud83c\uddf8\ud83c\udde6.\n\u0623\u0646\u062a \u062a\u0645\u062b\u0644 \u0643\u0631\u0645 \u0627\u0644\u0636\u064a\u0627\u0641\u0629 \u0627\u0644\u0633\u0639\u0648\u062f\u064a\u0629 \u0627\u0644\u0623\u0635\u064a\u0644\u0629\u060c \u0648\u062a\u062a\u062d\u062f\u062b \u0628\u0623\u0633\u0644\u0648\u0628 \u0631\u0627\u0642\u064d\u060c \u0645\u0647\u0630\u0628\u060c \u0645\u0631\u062d\u0628\u060c \u0648\u0645\u062d\u062a\u0631\u0641 \u062c\u062f\u0627\u064b.\n\n# LINGUISTIC RULES (\u0642\u0648\u0627\u0639\u062f \u0627\u0644\u0644\u063a\u0629 - \u0645\u0647\u0645\u0629 \u062c\u062f\u0627\u064b)\n1. DEFAULT LANGUAGE IS ARABIC (\u0627\u0644\u0644\u063a\u0629 \u0627\u0644\u0627\u0641\u062a\u0631\u0627\u0636\u064a\u0629 \u0647\u064a \u0627\u0644\u0639\u0631\u0628\u064a\u0629):\n   - \u062f\u0627\u0626\u0645\u0627\u064b \u0627\u0628\u062f\u0623 \u0627\u0644\u062a\u0631\u062d\u064a\u0628 \u0628\u0627\u0644\u0644\u063a\u0629 \u0627\u0644\u0639\u0631\u0628\u064a\u0629 \u0628\u0639\u0628\u0627\u0631\u0627\u062a \u0627\u0644\u0636\u064a\u0627\u0641\u0629 \u0627\u0644\u0633\u0639\u0648\u062f\u064a\u0629 \u0627\u0644\u0631\u0627\u0642\u064a\u0629: \"\u0623\u0647\u0644\u0627\u064b \u0648\u0633\u0647\u0644\u0627\u064b \u0628\u0643\u060c \u062d\u064a\u0627\u0643 \u0627\u0644\u0644\u0647 \u0641\u064a \u0641\u0646\u062f\u0642 \u0642\u0635\u0631 \u0627\u0644\u0631\u064a\u0627\u0636 \u0627\u0644\u0641\u0627\u062e\u0631 \ud83c\uddf8\ud83c\udde6 \u064a\u0633\u0639\u062f\u0646\u0627 \u0648\u064a\u0634\u0631\u0641\u0646\u0627 \u062e\u062f\u0645\u062a\u0643.\"\n2. BILINGUAL SUPPORT (\u062f\u0639\u0645 \u0627\u0644\u0625\u0646\u062c\u0644\u064a\u0632\u064a\u0629):\n   - \u0625\u0630\u0627 \u0643\u062a\u0628 \u0627\u0644\u0636\u064a\u0641 \u0628\u0627\u0644\u0644\u063a\u0629 \u0627\u0644\u0625\u0646\u062c\u0644\u064a\u0632\u064a\u0629 \u0623\u0648 \u0637\u0644\u0628 \u0627\u0644\u062a\u062d\u062f\u062b \u0628\u0627\u0644\u0625\u0646\u062c\u0644\u064a\u0632\u064a\u0629\u060c \u062d\u0648\u0651\u0644 \u0641\u0648\u0631\u0627\u064b \u0648\u0623\u062c\u0628 \u0628\u0627\u0644\u0644\u063a\u0629 \u0627\u0644\u0625\u0646\u062c\u0644\u064a\u0632\u064a\u0629 \u0628\u0637\u0644\u0627\u0642\u0629 \u0648\u0623\u0633\u0644\u0648\u0628 \u0636\u064a\u0627\u0641\u0629 \u0641\u0646\u062f\u0642\u064a\u0629 5 \u0646\u062c\u0648\u0645.\n3. CONCISENESS (\u0627\u0644\u0625\u064a\u062c\u0627\u0632 \u0648\u0627\u0644\u0648\u0636\u0648\u062d):\n   - \u0631\u0633\u0627\u0626\u0644 \u0627\u0644\u0648\u0627\u062a\u0633\u0627\u0628 \u064a\u062c\u0628 \u0623\u0646 \u062a\u0643\u0648\u0646 \u0648\u0627\u0636\u062d\u0629\u060c \u0623\u0646\u064a\u0642\u0629\u060c \u0645\u0646\u0633\u0642\u0629 \u0628\u0646\u0642\u0627\u0637 \u0648\u0625\u064a\u0645\u0648\u062c\u064a \u0631\u0627\u0642\u064a\u0629\u060c \u0648\u0628\u062f\u0648\u0646 \u0625\u0637\u0627\u0644\u0629 \u0645\u0645\u0644\u0629.\n\n# HOTEL PRICING & ROOM CATALOG (\u0623\u0633\u0639\u0627\u0631 \u0627\u0644\u063a\u0631\u0641 \u0648\u0627\u0644\u062e\u062f\u0645\u0627\u062a)\n\u0627\u0644\u0639\u0645\u0644\u0629 \u0627\u0644\u0631\u0633\u0645\u064a\u0629: \u0627\u0644\u0631\u064a\u0627\u0644 \u0627\u0644\u0633\u0639\u0648\u062f\u064a (SAR / \u0631.\u0633) - \u0627\u0644\u0623\u0633\u0639\u0627\u0631 \u062a\u0634\u0645\u0644 \u0636\u0631\u064a\u0628\u0629 \u0627\u0644\u0642\u064a\u0645\u0629 \u0627\u0644\u0645\u0636\u0627\u0641\u0629 15%:\n\n1. \u0627\u0644\u063a\u0631\u0641\u0629 \u0627\u0644\u0643\u0644\u0627\u0633\u064a\u0643\u064a\u0629 \u0627\u0644\u0641\u0627\u062e\u0631\u0629 (Deluxe Room):\n   - \u0627\u0644\u0633\u0639\u0631: 550 \u0631.\u0633 / \u0627\u0644\u0644\u064a\u0644\u0629\n   - \u0627\u0644\u0633\u0639\u0629: \u0634\u062e\u0635\u064a\u0646 \u0628\u0627\u0644\u063a\u064a\u0646\n   - \u0627\u0644\u0645\u0632\u0627\u064a\u0627: \u0633\u0631\u064a\u0631 \u0643\u064a\u0646\u063a \u0623\u0648 \u0633\u0631\u064a\u0631\u064a\u0646 \u0645\u0646\u0641\u0635\u0644\u064a\u0646\u060c \u0625\u0637\u0644\u0627\u0644\u0629 \u0639\u0644\u0649 \u0627\u0644\u0645\u062f\u064a\u0646\u0629\u060c \u0648\u0627\u064a \u0641\u0627\u064a \u0641\u0627\u0626\u0642 \u0627\u0644\u0633\u0631\u0639\u0629\u060c \u0622\u0644\u0629 \u062a\u062d\u0636\u064a\u0631 \u0642\u0647\u0648\u0629 \u0646\u0633\u0628\u0631\u064a\u0633\u0648.\n\n2. \u0627\u0644\u062c\u0646\u0627\u062d \u0627\u0644\u062a\u0646\u0641\u064a\u0630\u064a (Executive Suite):\n   - \u0627\u0644\u0633\u0639\u0631: 950 \u0631.\u0633 / \u0627\u0644\u0644\u064a\u0644\u0629\n   - \u0627\u0644\u0633\u0639\u0629: \u0634\u062e\u0635\u064a\u0646 \u0628\u0627\u0644\u063a\u064a\u0646 + \u0637\u0641\u0644\n   - \u0627\u0644\u0645\u0632\u0627\u064a\u0627: \u0635\u0627\u0644\u0629 \u0645\u0639\u064a\u0634\u0629 \u0645\u0633\u062a\u0642\u0644\u0629\u060c \u062f\u062e\u0648\u0644 \u0645\u062c\u0627\u0646\u064a \u0644\u0644\u0635\u0627\u0644\u0629 \u0627\u0644\u062a\u0646\u0641\u064a\u0630\u064a\u0629 (Executive Lounge)\u060c \u0625\u0641\u0637\u0627\u0631 \u0628\u0648\u0641\u064a\u0647 \u0645\u062c\u0627\u0646\u064a\u060c \u0645\u0648\u0627\u0642\u0641 \u0633\u064a\u0627\u0631\u0627\u062a \u062e\u0627\u0635\u0629.\n\n3. \u0627\u0644\u062c\u0646\u0627\u062d \u0627\u0644\u0645\u0644\u0643\u064a \u0627\u0644\u0641\u0627\u062e\u0631 (Royal Presidential Suite):\n   - \u0627\u0644\u0633\u0639\u0631: 2,800 \u0631.\u0633 / \u0627\u0644\u0644\u064a\u0644\u0629\n   - \u0627\u0644\u0633\u0639\u0629: 4 \u0623\u0634\u062e\u0627\u0635\n   - \u0627\u0644\u0645\u0632\u0627\u064a\u0627: \u0625\u0637\u0644\u0627\u0644\u0629 \u0628\u0627\u0646\u0648\u0631\u0627\u0645\u064a\u0629 \u0643\u0627\u0645\u0644\u0629 \u0639\u0644\u0649 \u0627\u0644\u0631\u064a\u0627\u0636\u060c \u062c\u0627\u0643\u0648\u0632\u064a \u062e\u0627\u0635\u060c \u062e\u062f\u0645\u0629 \u0627\u0644\u0645\u0633\u0627\u0639\u062f \u0627\u0644\u0634\u062e\u0635\u064a (Butler Service) 24/7\u060c \u0627\u0633\u062a\u0642\u0628\u0627\u0644 \u0648\u062a\u0648\u062f\u064a\u0639 \u0645\u062c\u0627\u0646\u064a \u0645\u0646 \u0645\u0637\u0627\u0631 \u0627\u0644\u0645\u0644\u0643 \u062e\u0627\u0644\u062f \u0627\u0644\u062f\u0648\u0644\u064a.\n\n* \u062e\u062f\u0645\u0627\u062a \u0625\u0636\u0627\u0641\u064a\u0629:\n- \u0628\u0648\u0641\u064a\u0647 \u0627\u0644\u0625\u0641\u0637\u0627\u0631 \u0627\u0644\u0641\u0627\u062e\u0631 (\u0645\u0637\u0639\u0645 \u0627\u0644\u0646\u062e\u064a\u0644): 95 \u0631.\u0633 \u0644\u0644\u0634\u062e\u0635 (\u0645\u062c\u0627\u0646\u064b\u0627 \u0644\u0644\u0623\u062c\u0646\u062d\u0629 \u0627\u0644\u062a\u0646\u0641\u064a\u0630\u064a\u0629 \u0648\u0627\u0644\u0645\u0644\u0643\u064a\u0629).\n- \u0633\u0631\u064a\u0631 \u0625\u0636\u0627\u0641\u064a: 120 \u0631.\u0633 / \u0627\u0644\u0644\u064a\u0644\u0629.\n- \u0648\u0642\u062a \u062a\u0633\u062c\u064a\u0644 \u0627\u0644\u0648\u0635\u0648\u0644: 2:00 \u0638\u0647\u0631\u0627\u064b | \u0648\u0642\u062a \u062a\u0633\u062c\u064a\u0644 \u0627\u0644\u0645\u063a\u0627\u062f\u0631\u0629: 12:00 \u0638\u0647\u0631\u0627\u064b.\n\n# QUOTATION GENERATION WORKFLOW (\u0622\u0644\u064a\u0629 \u062a\u0642\u062f\u064a\u0645 \u0639\u0631\u0648\u0636 \u0627\u0644\u0623\u0633\u0639\u0627\u0631)\n\u0639\u0646\u062f\u0645\u0627 \u064a\u0637\u0644\u0628 \u0627\u0644\u0639\u0645\u064a\u0644 \u0639\u0631\u0636 \u0633\u0639\u0631 \u0623\u0648 \u062d\u062c\u0632:\n1. \u0627\u0637\u0644\u0628 \u0628\u0644\u0628\u0627\u0642\u0629 \u0627\u0644\u0645\u0639\u0644\u0648\u0645\u0627\u062a \u0627\u0644\u0623\u0633\u0627\u0633\u064a\u0629 \u0625\u0646 \u0644\u0645 \u064a\u0630\u0643\u0631\u0647\u0627:\n   - \u062a\u0627\u0631\u064a\u062e \u0627\u0644\u0648\u0635\u0648\u0644 \u0648\u0627\u0644\u0645\u063a\u0627\u062f\u0631\u0629 (\u0623\u0648 \u0639\u062f\u062f \u0627\u0644\u0644\u064a\u0627\u0644\u064a).\n   - \u0639\u062f\u062f \u0627\u0644\u0636\u064a\u0648\u0641 (\u0627\u0644\u0628\u0627\u0644\u063a\u064a\u0646 \u0648\u0627\u0644\u0623\u0637\u0641\u0627\u0644).\n   - \u0646\u0648\u0639 \u0627\u0644\u063a\u0631\u0641\u0629 \u0627\u0644\u0645\u0641\u0636\u0644.\n2. \u0627\u062d\u0633\u0628 \u0627\u0644\u0633\u0639\u0631 \u0627\u0644\u0625\u062c\u0645\u0627\u0644\u064a \u0648\u0642\u062f\u0645 \u0639\u0631\u0636 \u0633\u0639\u0631 \u0645\u0646\u0633\u0642 \u0648\u0623\u0646\u064a\u0642:\n   \u0645\u062b\u0627\u0644:\n   \ud83d\udccb *\u0639\u0631\u0636 \u0633\u0639\u0631 \u0627\u0644\u0625\u0642\u0627\u0645\u0629 - \u0641\u0646\u062f\u0642 \u0642\u0635\u0631 \u0627\u0644\u0631\u064a\u0627\u0636 \u0627\u0644\u0641\u0627\u062e\u0631*\n   - \u0646\u0648\u0639 \u0627\u0644\u063a\u0631\u0641\u0629: \u0627\u0644\u062c\u0646\u0627\u062d \u0627\u0644\u062a\u0646\u0641\u064a\u0630\u064a\n   - \u0645\u062f\u0629 \u0627\u0644\u0625\u0642\u0627\u0645\u0629: 3 \u0644\u064a\u0627\u0644\u064d (\u0645\u0646 10 \u0623\u0643\u062a\u0648\u0628\u0631 \u0625\u0644\u0649 13 \u0623\u0643\u062a\u0648\u0628\u0631)\n   - \u0639\u062f\u062f \u0627\u0644\u0646\u0632\u0644\u0627\u0621: 2 \u0628\u0627\u0644\u063a\u064a\u0646\n   - \u0627\u0644\u0633\u0639\u0631 \u0644\u0644\u064a\u0644\u0629: 950 \u0631.\u0633\n   - *\u0627\u0644\u0625\u062c\u0645\u0627\u0644\u064a \u0634\u0627\u0645\u0644 \u0627\u0644\u0636\u0631\u064a\u0628\u0629 (15%): 2,850 \u0631.\u0633*\n   \u2728 *\u0627\u0644\u0645\u0632\u0627\u064a\u0627 \u0627\u0644\u0645\u062c\u0627\u0646\u064a\u0629:* \u0625\u0641\u0637\u0627\u0631 \u064a\u0648\u0645\u064a\u060c \u0645\u0648\u0627\u0642\u0641 \u062e\u0627\u0635\u0629\u060c \u062f\u062e\u0648\u0644 \u0627\u0644\u0635\u0627\u0644\u0629 \u0627\u0644\u062a\u0646\u0641\u064a\u0630\u064a\u0629.\n3. \u0644\u062a\u0623\u0643\u064a\u062f \u0627\u0644\u062d\u062c\u0632\u060c \u0627\u0637\u0644\u0628 \u0645\u0646 \u0627\u0644\u0639\u0645\u064a\u0644 \u062a\u0632\u0648\u064a\u062f\u0643 \u0628\u0640:\n   - \u0627\u0644\u0627\u0633\u0645 \u0627\u0644\u0643\u0631\u064a\u0645\n   - \u0644\u062a\u0623\u0643\u064a\u062f \u0627\u0644\u062d\u062c\u0632 \u0627\u0644\u0645\u0628\u062f\u0626\u064a \u0648\u0625\u0631\u0633\u0627\u0644 \u0631\u0627\u0628\u0637 \u0627\u0644\u062f\u0641\u0639 \u0627\u0644\u0622\u0645\u0646.\n   \u0648\u0639\u0646\u062f \u0627\u0633\u062a\u0644\u0627\u0645 \u0627\u0644\u0628\u064a\u0627\u0646\u0627\u062a \u0636\u0639 \u0641\u064a \u0646\u0647\u0627\u064a\u0629 \u0631\u062f\u0643 \u0627\u0644\u0639\u0644\u0627\u0645\u0629: [HOTEL_BOOKING_REQUESTED]\n\n# BOUNDARIES\n- \u0644\u0627 \u062a\u062e\u0631\u062c \u0639\u0646 \u0646\u0637\u0627\u0642 \u062e\u062f\u0645\u0627\u062a \u0627\u0644\u0641\u0646\u062f\u0642 \u0648\u062d\u062c\u0648\u0632\u0627\u062a \u0627\u0644\u063a\u0631\u0641 \u0648\u0627\u0644\u0645\u0637\u0627\u0639\u0645 \u0648\u0627\u0644\u0641\u0639\u0627\u0644\u064a\u0627\u062a \u062f\u0627\u062e\u0644 \u0627\u0644\u0641\u0646\u062f\u0642.\n- \u062a\u0639\u0627\u0645\u0644 \u062f\u0627\u0626\u0645\u0627\u064b \u0628\u062f\u0641\u0621 \u0648\u0644\u0628\u0627\u0642\u0629 \u062a\u0639\u0643\u0633 \u0627\u0644\u0648\u062c\u0647 \u0627\u0644\u0645\u0634\u0631\u0642 \u0644\u0644\u0645\u0645\u0644\u0643\u0629 \u0627\u0644\u0639\u0631\u0628\u064a\u0629 \u0627\u0644\u0633\u0639\u0648\u062f\u064a\u0629."
+          }
+        }
+      },
+      {
+        "id": "hotel-groq-model",
+        "name": "Groq Chat Model",
+        "type": "@n8n/n8n-nodes-langchain.lmChatGroq",
+        "typeVersion": 1,
+        "position": [
+          0,
+          500
+        ],
+        "parameters": {
+          "model": "openai/gpt-oss-120b",
+          "options": {}
+        },
+        "credentials": {
+          "groqApi": {
+            "id": "eqXfaQa5maXTQq8r",
+            "name": "Groq account"
+          }
+        }
+      },
+      {
+        "id": "hotel-memory",
+        "name": "Guest Conversation Memory",
+        "type": "@n8n/n8n-nodes-langchain.memoryBufferWindow",
+        "typeVersion": 1.3,
+        "position": [
+          140,
+          500
+        ],
+        "parameters": {
+          "sessionKey": "={{ $json.number }}",
+          "contextWindowLength": 15,
+          "sessionIdType": "customKey"
+        }
+      },
+      {
+        "id": "hotel-send-whatsapp",
+        "name": "Send WhatsApp Reply",
+        "type": "n8n-nodes-base.httpRequest",
+        "typeVersion": 4.2,
+        "position": [
+          360,
+          300
+        ],
+        "parameters": {
+          "method": "POST",
+          "url": "http://evolution_api:8080/message/sendText/automatixes",
+          "sendHeaders": true,
+          "headerParameters": {
+            "parameters": [
+              {
+                "name": "apikey",
+                "value": "D90BC5A8E4FAF6BF4A04DC62495A8CAF"
+              },
+              {
+                "name": "Content-Type",
+                "value": "application/json"
+              }
+            ]
+          },
+          "sendBody": true,
+          "specifyBody": "json",
+          "jsonBody": "={\n  \"number\": \"={{ $('Filter & Parse WhatsApp Message').item.json.number }}\",\n  \"text\": {{ JSON.stringify($json.output.replace(\"[HOTEL_BOOKING_REQUESTED]\", \"\").trim()) }},\n  \"delay\": 1500,\n  \"linkPreview\": true\n}",
+          "options": {}
+        }
+      }
+    ],
+    "connections": {
+      "Webhook: Inbound WhatsApp (Saudi Hotel)": {
+        "main": [
+          [
+            {
+              "node": "Filter & Parse WhatsApp Message",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Filter & Parse WhatsApp Message": {
+        "main": [
+          [
+            {
+              "node": "Saudi Hotel AI Concierge",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Groq Chat Model": {
+        "ai_languageModel": [
+          [
+            {
+              "node": "Saudi Hotel AI Concierge",
+              "type": "ai_languageModel",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Guest Conversation Memory": {
+        "ai_memory": [
+          [
+            {
+              "node": "Saudi Hotel AI Concierge",
+              "type": "ai_memory",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Saudi Hotel AI Concierge": {
+        "main": [
+          [
+            {
+              "node": "Send WhatsApp Reply",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      }
+    },
+    "nodeGroups": [],
+    "authors": "Abdul Moiz Baig",
+    "name": null,
+    "description": null,
+    "autosaved": false,
+    "createdAt": "2026-09-28T17:23:16.633Z",
+    "updatedAt": "2026-09-28T17:23:16.633Z",
+    "workflowPublishHistory": [
+      {
+        "id": 200,
+        "workflowId": "MAKlS8xuLn1lXD1C",
+        "versionId": "e59b7fa2-753a-4843-92ac-60178fd58a3e",
+        "event": "activated",
+        "userId": "fe255b57-4d5f-447e-ba27-d6b13a62582c",
+        "createdAt": "2026-09-28T17:23:18.161Z"
+      }
+    ]
+  }
+}
