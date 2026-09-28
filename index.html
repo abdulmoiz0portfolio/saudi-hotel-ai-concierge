@@ -4,9 +4,9 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>فندق قصر الرياض الفاخر — تجربة الضيافة السعودية والذكاء الاصطناعي</title>
-  <meta name="description" content="فندق قصر الرياض الفاخر بالمملكة العربية السعودية. احصل على عروض أسعار الغرف والأجنحة فورياً عبر مساعدنا الذكي سلطان على واتساب باللغتين العربية والإنجليزية.">
+  <meta name="description" content="فندق قصر الرياض الفاخر بالمملكة العربية السعودية. شات واتساب الذكاء الاصطناعي لحساب أسعار الغرف والأجنحة فورياً مع ضريبة 15% باللغتين العربية والإنجليزية.">
 
-  <!-- Google Fonts: Amiri (Calligraphy), Cairo (Modern Arabic), Playfair Display (Serif), Plus Jakarta Sans -->
+  <!-- Google Fonts: Cairo, Amiri, Plus Jakarta Sans, JetBrains Mono -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Amiri:ital,wght@0,400;0,700;1,400&family=Cairo:wght@300;400;500;600;700;800;900&family=Playfair+Display:ital,wght@0,600;0,700;0,900;1,600&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
@@ -39,11 +39,10 @@
               dark: '#0B141A',
               header: '#1F2C34',
               teal: '#00A884',
+              whatsappGreen: '#25D366',
               outgoing: '#005C4B',
-              incoming: '#202C33',
+              incoming: '#1F2C34',
               check: '#53BDEB',
-              checkGray: '#8696A0',
-              text: '#E9EDEF',
               muted: '#8696A0',
               inputBg: '#2A3942',
             }
@@ -57,8 +56,8 @@
           },
           boxShadow: {
             'gold-glow': '0 0 50px -10px rgba(212, 175, 55, 0.25)',
-            'phone-3d': '0 25px 60px -15px rgba(0, 0, 0, 0.9), 0 0 40px rgba(212, 175, 55, 0.15)',
-            'whatsapp-bubble': '0 1px 0.5px rgba(0, 0, 0, 0.2)',
+            'phone-3d': '0 25px 65px -15px rgba(0, 0, 0, 0.95), 0 0 45px rgba(212, 175, 55, 0.15)',
+            'whatsapp-bubble': '0 1px 0.5px rgba(0, 0, 0, 0.25)',
           }
         }
       }
@@ -69,25 +68,25 @@
   <script src="https://unpkg.com/lucide@latest"></script>
 
   <style>
-    /* WhatsApp Authentic Dark Wallpaper Pattern with WhatsApp SVG Doodles */
+    /* Exact WhatsApp Mobile Dark Doodle Wallpaper */
     .whatsapp-chat-bg {
       background-color: #0b141a;
-      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160' viewBox='0 0 160 160' fill='none' stroke='rgba(255,255,255,0.045)' stroke-width='1.2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M25 20h20a5 5 0 0 1 5 5v15a5 5 0 0 1-5 5H30l-8 7V25a5 5 0 0 1 5-5z'/%3E%3Cpath d='M110 30a12 12 0 1 0 0 24 12 12 0 0 0 0-24z'/%3E%3Cpath d='M106 42h8'/%3E%3Cpath d='M110 38v8'/%3E%3Cpath d='M70 15c2 6 8 8 12 4s6-2 10 4'/%3E%3Cpath d='M15 90h16v12a4 4 0 0 1-4 4H19a4 4 0 0 1-4-4V90z'/%3E%3Cpath d='M31 93h4a3 3 0 0 1 3 3v2a3 3 0 0 1-3 3h-4'/%3E%3Cpath d='M130 95l12-12m0 12l-12-12'/%3E%3Cpath d='M65 75a10 10 0 0 1 20 0c0 8-10 15-10 15s-10-7-10-15z'/%3E%3Cpath d='M100 135h30v15h-30z'/%3E%3Ccircle cx='108' cy='150' r='3'/%3E%3Ccircle cx='122' cy='150' r='3'/%3E%3Cpath d='M35 130a12 12 0 1 1 24 0'/%3E%3Cpath d='M47 130v12'/%3E%3C/svg%3E");
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160' viewBox='0 0 160 160' fill='none' stroke='rgba(255,255,255,0.042)' stroke-width='1.2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M25 20h20a5 5 0 0 1 5 5v15a5 5 0 0 1-5 5H30l-8 7V25a5 5 0 0 1 5-5z'/%3E%3Cpath d='M110 30a12 12 0 1 0 0 24 12 12 0 0 0 0-24z'/%3E%3Cpath d='M106 42h8'/%3E%3Cpath d='M110 38v8'/%3E%3Cpath d='M70 15c2 6 8 8 12 4s6-2 10 4'/%3E%3Cpath d='M15 90h16v12a4 4 0 0 1-4 4H19a4 4 0 0 1-4-4V90z'/%3E%3Cpath d='M31 93h4a3 3 0 0 1 3 3v2a3 3 0 0 1-3 3h-4'/%3E%3Cpath d='M130 95l12-12m0 12l-12-12'/%3E%3Cpath d='M65 75a10 10 0 0 1 20 0c0 8-10 15-10 15s-10-7-10-15z'/%3E%3Cpath d='M100 135h30v15h-30z'/%3E%3Ccircle cx='108' cy='150' r='3'/%3E%3Ccircle cx='122' cy='150' r='3'/%3E%3Ccircle cx='122' cy='150' r='3'/%3E%3Cpath d='M35 130a12 12 0 1 1 24 0'/%3E%3Cpath d='M47 130v12'/%3E%3C/svg%3E");
       background-size: 160px 160px;
     }
 
-    /* Titanium Bezel Effect for iPhone 16 Pro */
+    /* Phone Outer Frame */
     .titanium-frame {
-      background: linear-gradient(135deg, #3a3d3c 0%, #1e2020 50%, #444846 100%);
-      padding: 10px;
-      border-radius: 54px;
+      background: linear-gradient(135deg, #2f3332 0%, #151817 50%, #3a3e3d 100%);
+      padding: 9px;
+      border-radius: 50px;
       box-shadow: 
-        0 0 0 2px rgba(212, 175, 55, 0.35),
-        0 25px 65px rgba(0, 0, 0, 0.85),
-        inset 0 1px 2px rgba(255, 255, 255, 0.3);
+        0 0 0 2px rgba(212, 175, 55, 0.3),
+        0 25px 65px rgba(0, 0, 0, 0.9),
+        inset 0 1px 2px rgba(255, 255, 255, 0.25);
     }
 
-    /* WhatsApp Bubble Tails */
+    /* Authentic WhatsApp Message Tails */
     .bubble-incoming {
       position: relative;
       border-top-left-radius: 0px !important;
@@ -96,12 +95,12 @@
       content: "";
       position: absolute;
       top: 0;
-      left: -8px;
+      left: -7px;
       width: 0;
       height: 0;
       border-top: 0px solid transparent;
-      border-bottom: 12px solid transparent;
-      border-right: 10px solid #202C33;
+      border-bottom: 10px solid transparent;
+      border-right: 8px solid #1F2C34;
     }
 
     .bubble-outgoing {
@@ -112,27 +111,24 @@
       content: "";
       position: absolute;
       top: 0;
-      right: -8px;
+      right: -7px;
       width: 0;
       height: 0;
       border-top: 0px solid transparent;
-      border-bottom: 12px solid transparent;
-      border-left: 10px solid #005C4B;
+      border-bottom: 10px solid transparent;
+      border-left: 8px solid #005C4B;
     }
 
-    /* Custom Scrollbar for Phone Chat */
+    /* WhatsApp Custom Scrollbar */
     .chat-scroll::-webkit-scrollbar {
-      width: 4px;
-    }
-    .chat-scroll::-webkit-scrollbar-track {
-      background: transparent;
+      width: 3px;
     }
     .chat-scroll::-webkit-scrollbar-thumb {
-      background: rgba(255, 255, 255, 0.15);
+      background: rgba(255, 255, 255, 0.12);
       border-radius: 4px;
     }
 
-    /* Shimmer Gold Gradient Animation */
+    /* Shimmer Gold Gradient */
     @keyframes goldShimmer {
       0% { background-position: -200% 0; }
       100% { background-position: 200% 0; }
@@ -145,31 +141,31 @@
       animation: goldShimmer 6s infinite linear;
     }
 
+    /* Meta AI Spiral Ring Rotation */
+    @keyframes spinSwirl {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+    .meta-ai-swirl {
+      background: conic-gradient(from 180deg at 50% 50%, #9333EA 0deg, #EC4899 90deg, #06B6D4 180deg, #3B82F6 270deg, #9333EA 360deg);
+    }
+
     /* Message animation */
     @keyframes msgAppear {
-      from { opacity: 0; transform: translateY(6px) scale(0.98); }
-      to { opacity: 1; transform: translateY(0) scale(1); }
+      from { opacity: 0; transform: translateY(6px); }
+      to { opacity: 1; transform: translateY(0); }
     }
     .animate-msg {
-      animation: msgAppear 0.22s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+      animation: msgAppear 0.18s ease-out forwards;
     }
 
-    /* Pulse Audio Wave */
-    @keyframes wavePulse {
-      0%, 100% { height: 4px; }
-      50% { height: 18px; }
+    /* Blinking Cursor in Input */
+    @keyframes blink {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0; }
     }
-    .audio-bar {
-      animation: wavePulse 1.2s infinite ease-in-out;
-    }
-
-    /* Voice Note Recording Pulse */
-    @keyframes micRecordingPulse {
-      0%, 100% { transform: scale(1); opacity: 1; }
-      50% { transform: scale(1.15); opacity: 0.8; }
-    }
-    .recording-pulse {
-      animation: micRecordingPulse 1s infinite ease-in-out;
+    .cursor-blink {
+      animation: blink 1s infinite;
     }
   </style>
 </head>
@@ -210,7 +206,6 @@
         </a>
         <a href="#rooms" class="hover:text-gold-400 transition-colors">الأجنحة والأسعار</a>
         <a href="#amenities" class="hover:text-gold-400 transition-colors">المرافق الملكية</a>
-        <a href="#concierge" class="hover:text-gold-400 transition-colors">المساعد الذكي (سلطان)</a>
       </nav>
 
       <!-- Action Buttons & Language Switcher -->
@@ -218,7 +213,7 @@
         <!-- Settings/Webhook Modal Trigger -->
         <button onclick="toggleSettingsModal()" class="px-3 py-1.5 rounded-lg border border-white/10 bg-white/5 hover:bg-white/10 text-xs font-semibold text-slate-300 transition-all flex items-center gap-1.5" title="إعدادات الربط مع n8n أو الذكاء الاصطناعي">
           <i data-lucide="settings" class="w-3.5 h-3.5 text-gold-400"></i>
-          <span class="hidden sm:inline">إعدادات AI / n8n</span>
+          <span class="hidden sm:inline">إعدادات n8n / API</span>
         </button>
 
         <!-- Lang Toggle -->
@@ -230,7 +225,7 @@
         <!-- Direct WhatsApp Action Button -->
         <a href="#simulator" class="hidden sm:inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-gradient-to-r from-emerald-600 to-teal-500 hover:from-emerald-500 hover:to-teal-400 text-white font-semibold text-xs shadow-lg shadow-emerald-950/50 transition-all hover:scale-[1.02] active:scale-[0.98]">
           <i data-lucide="message-circle" class="w-4 h-4 fill-white"></i>
-          <span>جرب محادثة سلطان الحية</span>
+          <span>جرب شات الهاتف مباشرة</span>
         </a>
       </div>
     </div>
@@ -246,17 +241,17 @@
         <!-- Live Tag -->
         <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-gold-500/10 border border-gold-500/25 text-gold-300 text-xs font-semibold">
           <span class="w-2 h-2 rounded-full bg-gold-400 animate-ping"></span>
-          <span>شات واتساب حقيقي ومتفاعل بالكامل 🇸🇦</span>
+          <span>واجهة شات واتساب الحقيقية مع الذكاء الاصطناعي 🇸🇦</span>
         </div>
 
         <!-- Main Title -->
         <h1 class="text-4xl sm:text-5xl lg:text-6xl font-extrabold leading-[1.2] tracking-tight">
-          عالم من الفخامة الملكية — في ضيافة <span class="text-gold-shimmer">"سلطان"</span> الذكي
+          عالم من الفخامة الملكية — في ضيافة <span class="text-gold-shimmer">"قصر الرياض AI"</span>
         </h1>
 
         <!-- Subtitle -->
         <p class="text-base sm:text-lg text-slate-300 font-light leading-relaxed max-w-xl">
-          تحدث الآن مع المساعد الذكي "سلطان" مباشرة داخل شاشة الهاتف! شات واتساب حقيقي يحسب عروض الأسعار بدقة، يحسب الضريبة 15%، يجيب على استفسارات المسبح والمطعم والمطار، ويوفر حجزاً فورياً باللغتين العربية والإنجليزية.
+          نظام دردشة واتساب حقيقي ومتطابق تماماً مع تجربة الهاتف. رسالة ترحيبية واحدة أنيقة، اسم دردشة مطابق ومعتمد، إمكانية حساب الليالي والضريبة 15%، ونسخ الردود والتفاعل باللغتين العربية والإنجليزية.
         </p>
 
         <!-- Room Specs Quick Badges -->
@@ -266,7 +261,7 @@
             <div class="text-lg font-bold text-gold-400 mt-1">550 <span class="text-xs text-slate-400">ر.س/ليلة</span></div>
             <div class="text-[11px] text-slate-500 mt-0.5">إطلالة على الرياض</div>
           </div>
-          <div class="p-3.5 rounded-xl bg-white/[0.03] border border-gold-500/20 bg-gold-500/[0.02] backdrop-blur-sm cursor-pointer hover:border-gold-500/50 transition-colors" onclick="sendQuickPrompt('عرض سعر الجناح التنفيذي (3 ليالي)')">
+          <div class="p-3.5 rounded-xl bg-white/[0.03] border border-gold-500/20 bg-gold-500/[0.02] backdrop-blur-sm cursor-pointer hover:border-gold-500/50 transition-colors" onclick="sendQuickPrompt('عرض سعر الجناح التنفيذي 3 ليالي')">
             <div class="text-xs text-gold-300 font-medium">الجناح التنفيذي</div>
             <div class="text-lg font-bold text-gold-400 mt-1">950 <span class="text-xs text-slate-400">ر.س/ليلة</span></div>
             <div class="text-[11px] text-emerald-400 mt-0.5">شامل إفطار VIP</div>
@@ -282,111 +277,102 @@
         <div class="pt-4 border-t border-white/5 flex flex-wrap items-center gap-6 text-xs text-slate-400">
           <div class="flex items-center gap-2">
             <i data-lucide="check-circle-2" class="w-4 h-4 text-emerald-400"></i>
-            <span>واجهة واتساب حقيقية مع رسائل صوتية</span>
+            <span>تصميم WhatsApp Meta AI الأصلي المطابق تماماً</span>
           </div>
           <div class="flex items-center gap-2">
-            <i data-lucide="shield-check" class="w-4 h-4 text-gold-400"></i>
-            <span>حساب موثق رسمي من Meta ✓</span>
+            <i data-lucide="shield-check" class="w-4 h-4 text-blue-400"></i>
+            <span>حساب Meta AI موثق بالعلامة الزرقاء الرسمي ✓</span>
           </div>
           <div class="flex items-center gap-2">
-            <i data-lucide="calculator" class="w-4 h-4 text-teal-400"></i>
-            <span>حساب فوري لضريبة 15% وإجمالي الليالي</span>
+            <i data-lucide="copy" class="w-4 h-4 text-teal-400"></i>
+            <span>أزرار نسخ وتفاعل ونظام ردود حقيقي</span>
           </div>
         </div>
       </div>
 
-      <!-- Left Column: Ultra-Realistic 3D iPhone with Authentic Mobile WhatsApp UI -->
+      <!-- Left Column: Pixel-Perfect Mobile WhatsApp Meta AI Simulator -->
       <div id="simulator" class="lg:col-span-6 flex justify-center order-1 lg:order-2">
-        <div class="relative w-full max-w-[390px]">
+        <div class="relative w-full max-w-[380px]">
           
           <!-- Outer Phone Halo Glow -->
-          <div class="absolute -inset-4 bg-gradient-to-b from-gold-500/20 via-emerald-600/10 to-transparent rounded-[60px] blur-2xl -z-10 opacity-75"></div>
+          <div class="absolute -inset-4 bg-gradient-to-b from-blue-500/15 via-emerald-600/10 to-transparent rounded-[60px] blur-2xl -z-10 opacity-75"></div>
 
-          <!-- iPhone 16 Pro Chassis -->
+          <!-- Phone Chassis -->
           <div class="titanium-frame shadow-phone-3d transition-transform duration-300 hover:scale-[1.01] relative">
             
             <!-- Phone Screen Inner Shell -->
-            <div class="relative w-full h-[710px] bg-whatsapp-dark rounded-[46px] overflow-hidden flex flex-col border border-white/10 select-none">
+            <div class="relative w-full h-[710px] bg-whatsapp-dark rounded-[42px] overflow-hidden flex flex-col select-none text-left">
               
-              <!-- iOS Status Bar & Dynamic Island -->
-              <div class="h-10 bg-whatsapp-header w-full px-7 flex items-center justify-between z-30 select-none text-slate-200 text-xs font-semibold">
-                <span id="currentTimeClock" class="tracking-tight text-[11px] font-mono">9:41</span>
-                <!-- Dynamic Island Capsule -->
-                <div class="w-24 h-5 bg-black rounded-full flex items-center justify-center gap-2 px-2 shadow-inner">
-                  <div class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></div>
-                  <span class="text-[9px] text-gold-400 font-mono font-medium">سلطان AI</span>
+              <!-- Android Status Bar (Matching Image 3:51, Alarm, Battery 81%) -->
+              <div class="h-8 bg-whatsapp-dark w-full px-5 flex items-center justify-between z-30 select-none text-slate-200 text-xs font-medium">
+                <div class="flex items-center gap-2 text-[11px] font-mono tracking-tight">
+                  <span id="currentTimeClock">3:51</span>
+                  <i data-lucide="bell" class="w-3 h-3 text-slate-400"></i>
+                  <i data-lucide="alarm-clock" class="w-3 h-3 text-slate-400"></i>
                 </div>
                 <div class="flex items-center gap-1.5 text-[11px]">
                   <i data-lucide="signal" class="w-3 h-3"></i>
                   <i data-lucide="wifi" class="w-3 h-3"></i>
-                  <div class="w-5 h-2.5 border border-white/60 rounded-sm p-[1px] flex items-center">
-                    <div class="h-full w-full bg-emerald-400 rounded-[1px]"></div>
+                  <div class="flex items-center gap-0.5 bg-emerald-500/20 px-1.5 py-0.5 rounded-full border border-emerald-500/40 text-[10px] text-emerald-400 font-mono font-bold">
+                    <span>81</span>
+                    <i data-lucide="zap" class="w-2.5 h-2.5 fill-emerald-400"></i>
                   </div>
                 </div>
               </div>
 
-              <!-- Authentic WhatsApp App Header -->
-              <div class="bg-whatsapp-header px-3.5 py-2.5 flex items-center justify-between border-b border-white/5 z-20 shadow-md">
+              <!-- Authentic WhatsApp Meta AI App Header -->
+              <div class="bg-whatsapp-dark px-3 py-2 flex items-center justify-between border-b border-white/5 z-20 shadow-sm">
                 <div class="flex items-center gap-2.5">
                   <!-- Back arrow -->
-                  <button onclick="simulateBackClick()" class="text-whatsapp-text hover:text-whatsapp-teal transition-colors p-1">
-                    <i data-lucide="arrow-right" class="w-5 h-5"></i>
+                  <button onclick="simulateBackClick()" class="text-slate-200 hover:text-white transition-colors p-1">
+                    <i data-lucide="arrow-left" class="w-5 h-5"></i>
                   </button>
 
-                  <!-- Profile Avatar with Online Dot -->
-                  <div class="relative cursor-pointer" onclick="openHotelProfile()">
-                    <div class="w-10 h-10 rounded-full bg-gradient-to-br from-gold-500 to-amber-700 p-[1.5px] shadow-sm">
-                      <div class="w-full h-full bg-royal-900 rounded-full flex items-center justify-center overflow-hidden">
-                        <i data-lucide="crown" class="w-5 h-5 text-gold-300"></i>
-                      </div>
+                  <!-- Meta AI Gradient Ring Swirl Avatar -->
+                  <div class="relative w-9 h-9 rounded-full meta-ai-swirl p-[2px] shadow-sm flex items-center justify-center shrink-0">
+                    <div class="w-full h-full bg-[#0b141a] rounded-full flex items-center justify-center overflow-hidden">
+                      <!-- Inner Gradient Dots ring -->
+                      <div class="w-6 h-6 rounded-full bg-gradient-to-tr from-purple-500 via-pink-500 to-cyan-400 opacity-90 blur-[1px]"></div>
                     </div>
-                    <span id="avatarOnlineDot" class="absolute bottom-0 left-0 w-3 h-3 bg-emerald-500 border-2 border-whatsapp-header rounded-full"></span>
                   </div>
 
-                  <!-- Bot Name & Live Typing / Online Status -->
-                  <div class="text-right cursor-pointer" onclick="openHotelProfile()">
+                  <!-- Chat Title & Official Verified Blue Checkmark -->
+                  <div class="text-left cursor-pointer" onclick="openHotelProfile()">
                     <div class="flex items-center gap-1.5">
-                      <span class="font-bold text-sm text-whatsapp-text tracking-tight">سلطان | قصر الرياض</span>
-                      <!-- Official Verified Green Badge -->
-                      <div class="w-3.5 h-3.5 rounded-full bg-whatsapp-teal flex items-center justify-center text-[9px] text-white">
+                      <span id="headerChatName" class="font-bold text-sm text-slate-100 tracking-tight">Meta AI</span>
+                      <!-- Verified Blue Badge (Matching Screenshot) -->
+                      <div class="w-4 h-4 rounded-full bg-[#1877F2] flex items-center justify-center text-[10px] text-white shadow-sm font-bold">
                         ✓
                       </div>
                     </div>
-                    <p id="chatHeaderStatus" class="text-[11px] text-whatsapp-teal font-medium transition-colors">
-                      متصل الآن • خدمة النزلاء 🇸🇦
-                    </p>
+                    <p id="chatHeaderStatus" class="text-[10px] text-emerald-400 font-medium">فندق قصر الرياض 🇸🇦</p>
                   </div>
                 </div>
 
-                <!-- Call & Menu Icons -->
-                <div class="flex items-center gap-3.5 text-whatsapp-muted">
-                  <button onclick="startVideoCall()" class="hover:text-white transition-colors" title="مكالمة فيديو">
-                    <i data-lucide="video" class="w-5 h-5"></i>
-                  </button>
-                  <button onclick="startVoiceCall()" class="hover:text-white transition-colors" title="اتصال صوتي">
-                    <i data-lucide="phone" class="w-4 h-4"></i>
+                <!-- Call Encryption & Menu Icons (Matching Screenshot) -->
+                <div class="flex items-center gap-3.5 text-slate-300">
+                  <button onclick="showEncryptionInfo()" class="hover:text-white transition-colors" title="التشفير التام">
+                    <div class="flex items-center text-slate-300 hover:text-white">
+                      <i data-lucide="lock" class="w-4 h-4"></i>
+                    </div>
                   </button>
                   <div class="relative">
-                    <button onclick="toggleHeaderMenu()" class="hover:text-white transition-colors" title="خيارات إضافية">
+                    <button onclick="toggleHeaderMenu()" class="hover:text-white transition-colors p-1" title="خيارات إضافية">
                       <i data-lucide="more-vertical" class="w-4 h-4"></i>
                     </button>
                     <!-- WhatsApp 3-dots Dropdown Menu -->
-                    <div id="headerDropdownMenu" class="hidden absolute left-0 top-7 w-48 bg-whatsapp-header border border-white/10 rounded-xl shadow-2xl py-1.5 text-xs text-slate-200 z-50 text-right">
+                    <div id="headerDropdownMenu" class="hidden absolute right-0 top-7 w-48 bg-[#1f2c34] border border-white/10 rounded-xl shadow-2xl py-1.5 text-xs text-slate-200 z-50 text-right">
                       <button onclick="openHotelProfile()" class="w-full px-3 py-2 hover:bg-white/5 flex items-center justify-between text-right">
-                        <span>معلومات الفندق الرسمية</span>
+                        <span>معلومات الفندق والأسعار</span>
                         <i data-lucide="crown" class="w-3.5 h-3.5 text-gold-400"></i>
                       </button>
                       <button onclick="toggleSettingsModal()" class="w-full px-3 py-2 hover:bg-white/5 flex items-center justify-between text-right">
-                        <span>إعدادات n8n / API</span>
+                        <span>ربط n8n Webhook / API</span>
                         <i data-lucide="settings" class="w-3.5 h-3.5 text-teal-400"></i>
                       </button>
                       <button onclick="clearChatHistory()" class="w-full px-3 py-2 hover:bg-white/5 flex items-center justify-between text-right text-red-400">
                         <span>مسح المحادثة (Clear)</span>
                         <i data-lucide="trash-2" class="w-3.5 h-3.5"></i>
-                      </button>
-                      <button onclick="toggleAudioMute()" id="muteToggleBtn" class="w-full px-3 py-2 hover:bg-white/5 flex items-center justify-between text-right">
-                        <span id="muteLabel">كتم الأصوات</span>
-                        <i id="muteIcon" data-lucide="volume-2" class="w-3.5 h-3.5 text-slate-400"></i>
                       </button>
                       <div class="border-t border-white/5 my-1"></div>
                       <button onclick="toggleLanguage()" class="w-full px-3 py-2 hover:bg-white/5 flex items-center justify-between text-right text-gold-300">
@@ -399,68 +385,52 @@
               </div>
 
               <!-- WhatsApp Chat Messages Body -->
-              <div id="chatContainer" class="flex-1 whatsapp-chat-bg p-3.5 overflow-y-auto chat-scroll space-y-3 relative text-right z-10 text-xs">
+              <div id="chatContainer" class="flex-1 whatsapp-chat-bg p-3 overflow-y-auto chat-scroll space-y-3 relative z-10 text-xs">
                 
-                <!-- Date Separator Pill -->
+                <!-- Today Date Separator Badge (Matching Image) -->
                 <div class="text-center my-1">
-                  <span class="inline-block px-3 py-0.5 rounded-lg bg-[#182229] border border-white/5 text-[10px] text-whatsapp-muted shadow-sm">
-                    اليوم
+                  <span class="inline-block px-3 py-0.5 rounded-lg bg-[#182229] text-[11px] text-[#8696A0] font-sans shadow-sm">
+                    Today
                   </span>
                 </div>
 
-                <!-- Security Encryption Badge -->
-                <div class="text-center my-1.5">
-                  <span class="inline-block px-3.5 py-1.5 rounded-lg bg-whatsapp-incoming/90 border border-white/5 text-[10px] text-gold-300/90 leading-relaxed shadow-sm">
-                    🔒 الرسائل مشفرة تماماً. مرحباً بك في فندق قصر الرياض الفاخر بالمملكة العربية السعودية.
+                <!-- AI Disclaimer Card (Exact WhatsApp Meta AI text from Screenshot) -->
+                <div class="text-center my-1 px-4">
+                  <span class="inline-block px-3 py-1.5 rounded-xl bg-[#182229]/80 border border-white/5 text-[10.5px] text-[#8696A0] leading-relaxed shadow-sm">
+                    Messages are generated by AI. Some may be inaccurate or inappropriate. <a href="#" onclick="openHotelProfile(); return false;" class="text-slate-300 font-semibold underline">Learn more.</a>
                   </span>
                 </div>
 
-                <!-- Welcome Audio Note Bubble (Voice Note) -->
-                <div class="flex justify-start">
-                  <div class="bg-whatsapp-incoming bubble-incoming rounded-2xl p-3 max-w-[85%] border border-white/5 shadow-whatsapp-bubble space-y-2">
-                    <div class="flex items-center gap-3">
-                      <!-- Play Button -->
-                      <button onclick="playGreetingAudio()" class="w-9 h-9 rounded-full bg-whatsapp-teal flex items-center justify-center text-white shrink-0 hover:opacity-90 transition-transform active:scale-95 shadow">
-                        <i id="audioPlayIcon" data-lucide="play" class="w-4 h-4 fill-white ml-0.5"></i>
-                      </button>
-                      <!-- Waveform Animation -->
-                      <div class="flex items-center gap-0.5 flex-1 h-6">
-                        <div class="w-1 bg-whatsapp-teal/70 rounded-full audio-bar" style="animation-delay: 0.1s"></div>
-                        <div class="w-1 bg-whatsapp-teal/70 rounded-full audio-bar" style="animation-delay: 0.3s"></div>
-                        <div class="w-1 bg-whatsapp-teal/70 rounded-full audio-bar" style="animation-delay: 0.2s"></div>
-                        <div class="w-1 bg-whatsapp-teal/70 rounded-full audio-bar" style="animation-delay: 0.5s"></div>
-                        <div class="w-1 bg-whatsapp-teal/70 rounded-full audio-bar" style="animation-delay: 0.4s"></div>
-                        <div class="w-1 bg-whatsapp-teal/70 rounded-full audio-bar" style="animation-delay: 0.6s"></div>
-                        <div class="w-1 bg-whatsapp-teal/70 rounded-full audio-bar" style="animation-delay: 0.15s"></div>
-                        <div class="w-1 bg-whatsapp-teal/70 rounded-full audio-bar" style="animation-delay: 0.35s"></div>
-                        <div class="w-1 bg-whatsapp-teal/70 rounded-full audio-bar" style="animation-delay: 0.25s"></div>
-                      </div>
-                      <span id="voiceDurationLabel" class="text-[10px] text-whatsapp-muted font-mono">0:14</span>
+                <!-- ONLY ONE Initial Entering Message (As explicitly requested by user) -->
+                <div id="initialEnteringMessage" class="flex flex-col items-start gap-1">
+                  <div class="bg-whatsapp-incoming bubble-incoming rounded-2xl p-3 max-w-[85%] border border-white/5 shadow-whatsapp-bubble space-y-1.5 text-slate-100">
+                    <!-- Bold Sender Tag matching image -->
+                    <div id="chatLabelTag" class="text-xs font-bold text-slate-100 tracking-tight">
+                      Meta AI:
                     </div>
-                    <div class="text-[10px] text-slate-400 border-t border-white/5 pt-1.5 flex items-center justify-between">
-                      <span class="flex items-center gap-1">
-                        <i data-lucide="mic" class="w-3 h-3 text-whatsapp-teal"></i>
-                        رسالة ترحيبية صوتية من المساعد سلطان
-                      </span>
-                      <span class="text-[9px] text-whatsapp-muted font-mono">9:40 ص</span>
+                    <div class="text-xs leading-relaxed text-slate-200 space-y-1" id="enteringMessageBody" dir="auto">
+                      <p>أهلاً وسهلاً بك في <strong class="text-gold-400">فندق قصر الرياض الفاخر</strong> 🇸🇦✨</p>
+                      <p class="text-slate-300 text-[11.5px]">يسعدني تزويدك بعروض الأسعار الرسمية للغرف والأجنحة، وحساب إجمالي الليالي مع ضريبة القيمة المضافة 15% فورياً. كيف يمكنني خدمتك اليوم؟</p>
+                    </div>
+                    <div class="flex items-center justify-end pt-0.5 text-[10px] text-[#8696A0] font-mono" id="enteringMsgTime">
+                      3:51 AM
                     </div>
                   </div>
-                </div>
 
-                <!-- Initial Bot Message -->
-                <div class="flex justify-start">
-                  <div class="bg-whatsapp-incoming bubble-incoming rounded-2xl p-3 max-w-[88%] border border-white/5 shadow-whatsapp-bubble space-y-1.5 text-whatsapp-text">
-                    <p class="text-xs leading-relaxed">
-                      أهلاً وسهلاً بك، حياك الله في <strong class="text-gold-400">فندق قصر الرياض الفاخر</strong> 🇸🇦✨<br>
-                      أنا <strong>"سلطان"</strong> مساعدك الذكي لخدمة النزلاء وحجوزات الأجنحة الفاخرة. يسعدني ويشرفني خدمتك على مدار الساعة.
-                    </p>
-                    <p class="text-slate-300 text-[11px] leading-relaxed">
-                      بإمكانك كتابة أي سؤال: طلب تسعيرة دقيقة لأي مدة، تفاصيل الإفطار والمطعم، السبا والمسبح، أو حجز إقامتك الملكية فورياً.
-                    </p>
-                    <div class="flex items-center justify-between pt-1 text-[10px] text-whatsapp-muted">
-                      <span class="text-[9px] text-gold-400/80">🇸🇦 العربية (الافتراضية) & 🇬🇧 EN</span>
-                      <span class="font-mono">9:41 ص</span>
-                    </div>
+                  <!-- WhatsApp Action Icons Row Below Bubble (Copy, Share, Thumbs up, Thumbs down) -->
+                  <div class="flex items-center gap-3 px-2 text-[#8696A0]">
+                    <button onclick="copyMsgText('welcome')" class="hover:text-white transition-colors" title="نسخ الرسالة">
+                      <i data-lucide="copy" class="w-3.5 h-3.5"></i>
+                    </button>
+                    <button onclick="shareMsg()" class="hover:text-white transition-colors" title="مشاركة">
+                      <i data-lucide="forward" class="w-3.5 h-3.5"></i>
+                    </button>
+                    <button onclick="toggleLike(this)" class="hover:text-white transition-colors" title="أعجبني">
+                      <i data-lucide="thumbs-up" class="w-3.5 h-3.5"></i>
+                    </button>
+                    <button onclick="toggleDislike(this)" class="hover:text-white transition-colors" title="لم يعجبني">
+                      <i data-lucide="thumbs-down" class="w-3.5 h-3.5"></i>
+                    </button>
                   </div>
                 </div>
 
@@ -468,186 +438,131 @@
                 <div id="dynamicMessages" class="space-y-3"></div>
 
                 <!-- Realistic Typing Indicator Bubble -->
-                <div id="typingIndicator" class="hidden flex justify-start">
-                  <div class="bg-whatsapp-incoming bubble-incoming px-3.5 py-2.5 rounded-2xl border border-white/5 flex items-center gap-1.5 shadow-sm">
-                    <div class="w-2 h-2 rounded-full bg-whatsapp-teal animate-bounce" style="animation-delay: 0s"></div>
-                    <div class="w-2 h-2 rounded-full bg-whatsapp-teal animate-bounce" style="animation-delay: 0.2s"></div>
-                    <div class="w-2 h-2 rounded-full bg-whatsapp-teal animate-bounce" style="animation-delay: 0.4s"></div>
-                    <span class="text-[10px] text-whatsapp-muted mr-1.5">سلطان يكتب الآن...</span>
+                <div id="typingIndicator" class="hidden flex flex-col items-start">
+                  <div class="bg-whatsapp-incoming bubble-incoming px-3 py-2 rounded-2xl border border-white/5 flex items-center gap-1.5 shadow-sm">
+                    <div class="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-bounce" style="animation-delay: 0s"></div>
+                    <div class="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-bounce" style="animation-delay: 0.2s"></div>
+                    <div class="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-bounce" style="animation-delay: 0.4s"></div>
+                    <span class="text-[10px] text-[#8696A0] ml-1 font-mono">Meta AI typing...</span>
                   </div>
                 </div>
 
               </div>
 
-              <!-- Quick Action Interactive Prompt Chips -->
-              <div class="bg-whatsapp-header/95 border-t border-white/5 px-2.5 py-2 flex items-center gap-1.5 overflow-x-auto chat-scroll z-20">
-                <button onclick="sendQuickPrompt('عرض سعر الجناح التنفيذي (3 ليالي)')" class="shrink-0 px-2.5 py-1 rounded-full bg-whatsapp-incoming border border-white/10 hover:border-gold-500/50 hover:bg-gold-500/10 text-[10px] text-slate-200 transition-all flex items-center gap-1">
-                  <span>✨</span> جناح تنفيذي (3 ليالي)
+              <!-- Quick Action Minimalist Prompt Pills -->
+              <div class="bg-whatsapp-dark/95 border-t border-white/5 px-2.5 py-1.5 flex items-center gap-1.5 overflow-x-auto chat-scroll z-20">
+                <button onclick="sendQuickPrompt('Hi')" class="shrink-0 px-2.5 py-1 rounded-full bg-[#1f2c34] border border-white/10 hover:border-emerald-500/50 hover:bg-emerald-500/10 text-[10.5px] text-slate-200 transition-all font-sans">
+                  Hi
                 </button>
-                <button onclick="sendQuickPrompt('كم سعر الغرفة الكلاسيكية لشخصين؟')" class="shrink-0 px-2.5 py-1 rounded-full bg-whatsapp-incoming border border-white/10 hover:border-gold-500/50 hover:bg-gold-500/10 text-[10px] text-slate-200 transition-all flex items-center gap-1">
-                  <span>🏨</span> غرفة كلاسيكية (550 ر.س)
+                <button onclick="sendQuickPrompt('عرض سعر الجناح التنفيذي 3 ليالي')" class="shrink-0 px-2.5 py-1 rounded-full bg-[#1f2c34] border border-white/10 hover:border-gold-500/50 hover:bg-gold-500/10 text-[10.5px] text-slate-200 transition-all">
+                  ✨ جناح تنفيذي (3 ليالي)
                 </button>
-                <button onclick="sendQuickPrompt('تفاصيل وأسعار الجناح الملكي الفاخر')" class="shrink-0 px-2.5 py-1 rounded-full bg-whatsapp-incoming border border-white/10 hover:border-gold-500/50 hover:bg-gold-500/10 text-[10px] text-slate-200 transition-all flex items-center gap-1">
-                  <span>👑</span> الجناح الملكي
+                <button onclick="sendQuickPrompt('كم سعر الغرفة الكلاسيكية لشخصين؟')" class="shrink-0 px-2.5 py-1 rounded-full bg-[#1f2c34] border border-white/10 hover:border-gold-500/50 hover:bg-gold-500/10 text-[10.5px] text-slate-200 transition-all">
+                  🏨 غرفة كلاسيكية (550 ر.س)
                 </button>
-                <button onclick="sendQuickPrompt('هل يتوفر مسبح وسبا في الفندق؟')" class="shrink-0 px-2.5 py-1 rounded-full bg-whatsapp-incoming border border-white/10 hover:border-gold-500/50 hover:bg-gold-500/10 text-[10px] text-slate-200 transition-all flex items-center gap-1">
-                  <span>🏊</span> المسبح والسبا
+                <button onclick="sendQuickPrompt('تفاصيل وأسعار الجناح الملكي الفاخر')" class="shrink-0 px-2.5 py-1 rounded-full bg-[#1f2c34] border border-white/10 hover:border-gold-500/50 hover:bg-gold-500/10 text-[10.5px] text-slate-200 transition-all">
+                  👑 الجناح الملكي
                 </button>
-                <button onclick="sendQuickPrompt('مواعيد بوفيه الإفطار ومطعم النخيل')" class="shrink-0 px-2.5 py-1 rounded-full bg-whatsapp-incoming border border-white/10 hover:border-gold-500/50 hover:bg-gold-500/10 text-[10px] text-slate-200 transition-all flex items-center gap-1">
-                  <span>🍽️</span> بوفيه الإفطار
-                </button>
-                <button onclick="sendQuickPrompt('Hello Sultan, could you give me quotation in English for 2 nights?')" class="shrink-0 px-2.5 py-1 rounded-full bg-whatsapp-incoming border border-white/10 hover:border-gold-500/50 hover:bg-gold-500/10 text-[10px] text-gold-300 transition-all font-sans flex items-center gap-1">
-                  <span>🇬🇧</span> English Quote
+                <button onclick="sendQuickPrompt('Are rooms available for 2 nights?')" class="shrink-0 px-2.5 py-1 rounded-full bg-[#1f2c34] border border-white/10 hover:border-blue-500/50 hover:bg-blue-500/10 text-[10.5px] text-blue-300 transition-all font-sans">
+                  🇬🇧 English Quote
                 </button>
               </div>
 
               <!-- WhatsApp Emoji Quick Picker Drawer (Hidden by default) -->
-              <div id="emojiDrawer" class="hidden bg-whatsapp-header border-t border-white/10 px-3 py-2 flex items-center gap-2 overflow-x-auto chat-scroll z-20">
+              <div id="emojiDrawer" class="hidden bg-[#1f2c34] border-t border-white/10 px-3 py-2 flex items-center gap-2.5 overflow-x-auto chat-scroll z-20">
                 <button onclick="insertEmoji('🇸🇦')" class="text-base hover:scale-125 transition-transform">🇸🇦</button>
                 <button onclick="insertEmoji('✨')" class="text-base hover:scale-125 transition-transform">✨</button>
                 <button onclick="insertEmoji('🏨')" class="text-base hover:scale-125 transition-transform">🏨</button>
                 <button onclick="insertEmoji('👑')" class="text-base hover:scale-125 transition-transform">👑</button>
                 <button onclick="insertEmoji('🔑')" class="text-base hover:scale-125 transition-transform">🔑</button>
                 <button onclick="insertEmoji('☕')" class="text-base hover:scale-125 transition-transform">☕</button>
-                <button onclick="insertEmoji('🌹')" class="text-base hover:scale-125 transition-transform">🌹</button>
                 <button onclick="insertEmoji('👍')" class="text-base hover:scale-125 transition-transform">👍</button>
                 <button onclick="insertEmoji('❤️')" class="text-base hover:scale-125 transition-transform">❤️</button>
                 <button onclick="insertEmoji('📅')" class="text-base hover:scale-125 transition-transform">📅</button>
-                <button onclick="insertEmoji('✈️')" class="text-base hover:scale-125 transition-transform">✈️</button>
-                <button onclick="insertEmoji('🚗')" class="text-base hover:scale-125 transition-transform">🚗</button>
               </div>
 
-              <!-- WhatsApp Attachment Sheet (Hidden by default) -->
-              <div id="attachmentMenu" class="hidden bg-[#182229] border-t border-white/10 p-3 grid grid-cols-4 gap-3 z-30 animate-msg">
-                <button onclick="sendQuickPrompt('أريد الاطلاع على كتالوج صور الغرف والأجنحة')" class="flex flex-col items-center gap-1.5 p-2 rounded-xl hover:bg-white/5 text-slate-300 transition-colors">
-                  <div class="w-10 h-10 rounded-full bg-gradient-to-tr from-purple-600 to-indigo-500 flex items-center justify-center text-white shadow">
-                    <i data-lucide="image" class="w-5 h-5"></i>
-                  </div>
-                  <span class="text-[10px]">الصور</span>
-                </button>
-                <button onclick="sendQuickPrompt('أين يقع الفندق بالضبط؟ وما هي أقرب المعالم؟')" class="flex flex-col items-center gap-1.5 p-2 rounded-xl hover:bg-white/5 text-slate-300 transition-colors">
-                  <div class="w-10 h-10 rounded-full bg-gradient-to-tr from-emerald-600 to-teal-500 flex items-center justify-center text-white shadow">
-                    <i data-lucide="map-pin" class="w-5 h-5"></i>
-                  </div>
-                  <span class="text-[10px]">الموقع</span>
-                </button>
-                <button onclick="sendQuickPrompt('ما هي وسائل الدفع وسياسة الإلغاء؟')" class="flex flex-col items-center gap-1.5 p-2 rounded-xl hover:bg-white/5 text-slate-300 transition-colors">
-                  <div class="w-10 h-10 rounded-full bg-gradient-to-tr from-amber-600 to-yellow-500 flex items-center justify-center text-white shadow">
-                    <i data-lucide="credit-card" class="w-5 h-5"></i>
-                  </div>
-                  <span class="text-[10px]">الدفع</span>
-                </button>
-                <button onclick="sendQuickPrompt('هل لديكم عروض خاصة أو كود خصم متاح الآن؟')" class="flex flex-col items-center gap-1.5 p-2 rounded-xl hover:bg-white/5 text-slate-300 transition-colors">
-                  <div class="w-10 h-10 rounded-full bg-gradient-to-tr from-pink-600 to-rose-500 flex items-center justify-center text-white shadow">
-                    <i data-lucide="sparkles" class="w-5 h-5"></i>
-                  </div>
-                  <span class="text-[10px]">عروض وخصم</span>
-                </button>
-              </div>
-
-              <!-- Real Mobile WhatsApp Input Bar -->
-              <div class="bg-whatsapp-header px-2.5 py-2 flex items-end gap-1.5 border-t border-white/5 z-20 relative">
+              <!-- Authentic WhatsApp Mobile Input Bar (Matching Image Pixel-for-Pixel) -->
+              <div class="bg-whatsapp-dark px-2 py-2 flex items-center gap-1.5 border-t border-white/5 z-20 relative">
                 
                 <!-- Rounded Message Pill Container -->
-                <div class="flex-1 bg-whatsapp-inputBg rounded-3xl flex items-center px-3 py-1.5 gap-2 min-h-[42px] border border-white/5 shadow-inner">
+                <div class="flex-1 bg-whatsapp-inputBg rounded-3xl flex items-center px-3 py-1.5 gap-2 min-h-[44px] shadow-inner">
                   
-                  <!-- Emoji Button -->
-                  <button type="button" onclick="toggleEmojiDrawer()" class="text-whatsapp-muted hover:text-white transition-colors shrink-0 p-0.5">
+                  <!-- Emoji Smiley Button -->
+                  <button type="button" onclick="toggleEmojiDrawer()" class="text-[#8696A0] hover:text-white transition-colors shrink-0">
                     <i data-lucide="smile" class="w-5 h-5"></i>
                   </button>
                   
-                  <!-- Dynamic Input Box -->
-                  <input 
-                    type="text" 
-                    id="userChatInput" 
-                    placeholder="مراسلة..." 
-                    dir="auto"
-                    oninput="handleInputChange(this)"
-                    onkeydown="handleInputKeydown(event)"
-                    autocomplete="off"
-                    class="flex-1 bg-transparent text-whatsapp-text placeholder-whatsapp-muted text-xs focus:outline-none font-medium py-1"
-                  />
+                  <!-- Dynamic Input Box with Green Vertical Cursor matching image -->
+                  <div class="flex-1 flex items-center relative">
+                    <input 
+                      type="text" 
+                      id="userChatInput" 
+                      placeholder="Message" 
+                      dir="auto"
+                      oninput="handleInputChange(this)"
+                      onkeydown="handleInputKeydown(event)"
+                      autocomplete="off"
+                      class="w-full bg-transparent text-slate-100 placeholder-[#8696A0] text-sm focus:outline-none font-sans py-1"
+                    />
+                  </div>
                   
                   <!-- Attachment Paperclip -->
-                  <button type="button" onclick="toggleAttachmentMenu()" class="text-whatsapp-muted hover:text-white transition-colors shrink-0 p-0.5" title="مرفقات">
+                  <button type="button" onclick="sendQuickPrompt('أريد الاطلاع على كتالوج صور الغرف والأسعار')" class="text-[#8696A0] hover:text-white transition-colors shrink-0" title="مرفقات">
                     <i data-lucide="paperclip" class="w-5 h-5"></i>
                   </button>
 
                   <!-- Camera Button (Visible when empty) -->
-                  <button type="button" id="cameraBtn" onclick="simulateCameraSend()" class="text-whatsapp-muted hover:text-white transition-colors shrink-0 p-0.5" title="كاميرا">
+                  <button type="button" id="cameraBtn" onclick="simulateCameraSend()" class="text-[#8696A0] hover:text-white transition-colors shrink-0" title="كاميرا">
                     <i data-lucide="camera" class="w-5 h-5"></i>
                   </button>
                 </div>
 
-                <!-- Floating Mic / Send Button (WhatsApp Green Circular Action Button) -->
+                <!-- Floating Mic / Send Button (WhatsApp Green Circular Action Button #25D366 matching image) -->
                 <button 
                   type="button" 
                   id="actionSendBtn" 
                   onclick="handleActionBtnClick()"
-                  class="w-10 h-10 rounded-full bg-whatsapp-teal hover:bg-emerald-600 text-white flex items-center justify-center transition-all duration-200 active:scale-90 shadow-md shrink-0"
+                  class="w-11 h-11 rounded-full bg-whatsapp-whatsappGreen hover:bg-emerald-500 text-black flex items-center justify-center transition-all duration-200 active:scale-90 shadow-md shrink-0 font-bold"
                   title="إرسال رسالة"
                 >
-                  <i id="actionBtnIcon" data-lucide="mic" class="w-5 h-5"></i>
+                  <i id="actionBtnIcon" data-lucide="mic" class="w-5 h-5 text-black fill-black"></i>
                 </button>
               </div>
 
-              <!-- iPhone Home Indicator Bar -->
-              <div class="h-4 bg-whatsapp-header w-full flex items-center justify-center z-30 pb-1">
-                <div class="w-32 h-1 bg-white/40 rounded-full"></div>
+              <!-- Android Navigation Bar (White pill line matching image) -->
+              <div class="h-4 bg-whatsapp-dark w-full flex items-center justify-center z-30 pb-1">
+                <div class="w-32 h-1 bg-white/70 rounded-full"></div>
               </div>
 
-            </div>
-
-            <!-- WhatsApp Simulated Call Screen Overlay (Hidden) -->
-            <div id="callOverlay" class="hidden absolute inset-0 bg-royal-950/95 backdrop-blur-md rounded-[54px] z-50 p-8 flex flex-col justify-between items-center text-center animate-msg">
-              <div class="space-y-4 pt-10">
-                <div class="w-24 h-24 mx-auto rounded-full bg-gradient-to-br from-gold-500 to-amber-700 p-1 shadow-gold-glow animate-pulse">
-                  <div class="w-full h-full bg-royal-900 rounded-full flex items-center justify-center">
-                    <i data-lucide="crown" class="w-12 h-12 text-gold-300"></i>
-                  </div>
-                </div>
-                <div>
-                  <h3 class="text-xl font-bold text-white">سلطان | فندق قصر الرياض</h3>
-                  <p id="callStatusLabel" class="text-xs text-emerald-400 font-medium mt-1">جاري الاتصال... خدمة النزلاء VIP 🇸🇦</p>
-                </div>
-              </div>
-
-              <div class="text-xs text-slate-400 max-w-xs leading-relaxed bg-white/5 p-3 rounded-xl border border-white/5">
-                خدمة الضيافة والاستقبال متاحة للاتصال الصوتي والمرئي على مدار 24 ساعة لجميع النزلاء المؤكدين.
-              </div>
-
-              <div class="pb-10">
-                <button onclick="endCall()" class="w-14 h-14 rounded-full bg-red-600 hover:bg-red-500 text-white flex items-center justify-center shadow-lg hover:scale-105 active:scale-95 transition-all">
-                  <i data-lucide="phone-off" class="w-6 h-6"></i>
-                </button>
-              </div>
             </div>
 
             <!-- Hotel Official Details Modal (Hidden) -->
-            <div id="hotelProfileModal" class="hidden absolute inset-2 bg-royal-900/98 backdrop-blur-xl rounded-[44px] z-50 p-6 flex flex-col justify-between overflow-y-auto chat-scroll border border-gold-500/30 text-right animate-msg">
+            <div id="hotelProfileModal" class="hidden absolute inset-2 bg-royal-900/98 backdrop-blur-xl rounded-[38px] z-50 p-6 flex flex-col justify-between overflow-y-auto chat-scroll border border-gold-500/30 text-right animate-msg">
               <div class="space-y-4">
                 <div class="flex items-center justify-between border-b border-white/10 pb-3">
                   <button onclick="closeHotelProfile()" class="p-1 rounded-lg bg-white/5 hover:bg-white/10 text-slate-300">
                     <i data-lucide="x" class="w-5 h-5"></i>
                   </button>
                   <div class="flex items-center gap-2">
-                    <span class="text-xs text-gold-400 font-bold">بطاقة تعريف الفندق الرسمية</span>
+                    <span class="text-xs text-gold-400 font-bold">بطاقة تعريف فندق قصر الرياض</span>
                     <i data-lucide="crown" class="w-4 h-4 text-gold-400"></i>
                   </div>
                 </div>
 
                 <div class="text-center py-2">
-                  <div class="w-16 h-16 mx-auto rounded-full bg-gold-500/20 border border-gold-500/40 flex items-center justify-center mb-2">
-                    <i data-lucide="crown" class="w-8 h-8 text-gold-400"></i>
+                  <div class="w-14 h-14 mx-auto rounded-full meta-ai-swirl p-[2px] flex items-center justify-center mb-2">
+                    <div class="w-full h-full bg-royal-950 rounded-full flex items-center justify-center">
+                      <i data-lucide="crown" class="w-7 h-7 text-gold-400"></i>
+                    </div>
                   </div>
                   <h4 class="text-base font-bold text-white">فندق قصر الرياض الفاخر 5 نجوم</h4>
-                  <p class="text-[11px] text-slate-400">The Royal Riyadh Grand Hotel & Suites</p>
+                  <p class="text-[11px] text-slate-400">The Royal Riyadh Grand Hotel & Suites 🇸🇦</p>
                 </div>
 
                 <div class="space-y-2.5 text-xs text-slate-300">
                   <div class="p-2.5 rounded-xl bg-white/[0.03] border border-white/5">
                     <span class="text-gold-400 font-semibold block mb-0.5">📍 العنوان والموقع:</span>
-                    طريق الملك فهد، حي العليا، الرياض، بالقرب من برج المملكة ومركز كافد (KAFD).
+                    طريق الملك فهد، حي العليا، الرياض، بالقرب من مركز كافد (KAFD) وبرج المملكة.
                   </div>
                   <div class="p-2.5 rounded-xl bg-white/[0.03] border border-white/5">
                     <span class="text-gold-400 font-semibold block mb-0.5">⏰ مواعيد الدخول والمغادرة:</span>
@@ -656,10 +571,6 @@
                   <div class="p-2.5 rounded-xl bg-white/[0.03] border border-white/5">
                     <span class="text-gold-400 font-semibold block mb-0.5">📞 هاتف الاستقبال المباشر:</span>
                     <span dir="ltr" class="font-mono text-emerald-400">+966 11 800 5555</span>
-                  </div>
-                  <div class="p-2.5 rounded-xl bg-white/[0.03] border border-white/5">
-                    <span class="text-gold-400 font-semibold block mb-0.5">🇸🇦 الضيافة والقهوة السعودية:</span>
-                    مجاناً على مدار الساعة في اللوبي لجميع الزوار الكرام مع التمور الفاخرة.
                   </div>
                 </div>
               </div>
@@ -686,7 +597,7 @@
           أجنحة مصممة لأصحاب الذوق الرفيع
         </h2>
         <p class="text-slate-400 text-sm leading-relaxed">
-          جميع الأسعار بالريال السعودي وتشمل ضريبة القيمة المضافة 15%. يمكنك النقر على أي جناح لتجربة حوار تسعير فوري ومباشر مع سلطان.
+          جميع الأسعار بالريال السعودي وتشمل ضريبة القيمة المضافة 15%. يمكنك النقر على أي جناح لتجربة حوار تسعير فوري ومباشر مع الذكاء الاصطناعي.
         </p>
       </div>
 
@@ -705,7 +616,7 @@
             <div>
               <h3 class="text-lg font-bold text-white group-hover:text-gold-300 transition-colors">الغرفة الكلاسيكية الفاخرة</h3>
               <p class="text-xs text-slate-400 mt-1.5 leading-relaxed">
-                سرير كينغ مريح أو سريرين منفصلين، إطلالة هادئة على مدينة الرياض، واي فاي فائق السرعة، ومكتب عمل أنيق.
+                سرير كينغ مريح، إطلالة هادئة على مدينة الرياض، واي فاي فائق السرعة، ومكتب عمل أنيق.
               </p>
             </div>
             <button onclick="sendQuickPrompt('أريد عرض سعر للغرفة الكلاسيكية الفاخرة ليلتين')" class="w-full py-2.5 rounded-xl bg-white/5 hover:bg-gold-500/20 border border-white/10 hover:border-gold-500/40 text-gold-300 text-xs font-bold transition-all flex items-center justify-center gap-2">
@@ -730,7 +641,7 @@
             <div>
               <h3 class="text-lg font-bold text-white group-hover:text-gold-300 transition-colors">الجناح التنفيذي (Executive Suite)</h3>
               <p class="text-xs text-slate-400 mt-1.5 leading-relaxed">
-                صالة معيشة مستقلة فاخرة، دخول مجاني للصالة التنفيذية، إفطار بوفيه يومي مجاني لشخصين، ومواقف سيارات خاصة.
+                صالة معيشة مستقلة، دخول مجاني للصالة التنفيذية، إفطار بوفيه يومي مجاني لشخصين ومواقف سيارات.
               </p>
             </div>
             <button onclick="sendQuickPrompt('أريد عرض سعر للجناح التنفيذي الفاخر 3 ليالي')" class="w-full py-2.5 rounded-xl bg-gradient-to-r from-gold-500 to-amber-600 hover:from-gold-400 hover:to-amber-500 text-royal-950 text-xs font-bold transition-all shadow flex items-center justify-center gap-2">
@@ -752,7 +663,7 @@
             <div>
               <h3 class="text-lg font-bold text-white group-hover:text-gold-300 transition-colors">الجناح الملكي الرئاسي</h3>
               <p class="text-xs text-slate-400 mt-1.5 leading-relaxed">
-                إطلالة بانورامية كاملة على العاصمة، جاكوزي خاص، خدمة كبير الخدم (Butler) 24 ساعة، واستقبال مجاني من المطار.
+                إطلالة بانورامية كاملة، جاكوزي خاص، خدمة كبير الخدم 24 ساعة واستقبال مجاني من المطار.
               </p>
             </div>
             <button onclick="sendQuickPrompt('تفاصيل وأسعار الجناح الملكي الفاخر ليلتين')" class="w-full py-2.5 rounded-xl bg-white/5 hover:bg-gold-500/20 border border-white/10 hover:border-gold-500/40 text-gold-300 text-xs font-bold transition-all flex items-center justify-center gap-2">
@@ -833,7 +744,7 @@
       </div>
 
       <p class="text-xs text-slate-300 leading-relaxed">
-        يعمل المساعد الذكي "سلطان" تلقائياً بمحرك ذكاء اصطناعي سعودي فوري ودقيق لحساب الأسعار والضريبة. يمكنك أيضاً ربطه مباشرة بـ <strong>n8n Webhook</strong> الخاص بك على سيرفر VPS إذا أردت!
+        يعمل المحرك الذكي فورياً وبدقة عالية لحساب الأسعار والضريبة 15%. يمكنك أيضاً ربطه مباشرة بـ <strong>n8n Webhook</strong> الخاص بك على سيرفر VPS إذا أردت!
       </p>
 
       <div class="space-y-2">
@@ -845,7 +756,7 @@
           dir="ltr"
           class="w-full bg-royal-950 border border-white/10 rounded-xl px-3.5 py-2 text-xs text-slate-200 placeholder-slate-500 focus:outline-none focus:border-gold-500"
         />
-        <span class="text-[10px] text-slate-400 block">إذا تركته فارغاً، سيعمل النظام بالمحرك الذكي الداخلي عالي الدقة فورياً بدون أي تأخير.</span>
+        <span class="text-[10px] text-slate-400 block">إذا تركته فارغاً، سيعمل النظام بالمحرك الذكي المدمج فورياً.</span>
       </div>
 
       <div class="flex items-center justify-between pt-2">
@@ -857,6 +768,11 @@
         </button>
       </div>
     </div>
+  </div>
+
+  <!-- Toast Notification -->
+  <div id="toastNotification" class="hidden fixed bottom-6 left-1/2 -translate-x-1/2 z-50 px-4 py-2 rounded-full bg-slate-900/90 border border-white/10 text-white text-xs shadow-2xl backdrop-blur-md animate-msg">
+    <span id="toastText">تم النسخ بنجاح!</span>
   </div>
 
   <!-- Footer -->
@@ -880,7 +796,7 @@
     // Initialize Lucide Icons
     lucide.createIcons();
 
-    // Clock updater for iOS Status Bar
+    // Clock updater
     function updateClock() {
       const now = new Date();
       let hours = now.getHours();
@@ -893,9 +809,7 @@
     setInterval(updateClock, 30000);
 
     // Audio SFX via Web Audio API (Synthesized WhatsApp sound effects)
-    let isMuted = false;
     let audioCtx = null;
-
     function getAudioContext() {
       if (!audioCtx) {
         audioCtx = new (window.AudioContext || window.webkitAudioContext)();
@@ -906,9 +820,7 @@
       return audioCtx;
     }
 
-    // Authentic WhatsApp Send 'Pop' Sound
     function playSendSound() {
-      if (isMuted) return;
       try {
         const ctx = getAudioContext();
         const osc = ctx.createOscillator();
@@ -916,7 +828,7 @@
         osc.type = 'sine';
         osc.frequency.setValueAtTime(850, ctx.currentTime);
         osc.frequency.exponentialRampToValueAtTime(1450, ctx.currentTime + 0.07);
-        gain.gain.setValueAtTime(0.15, ctx.currentTime);
+        gain.gain.setValueAtTime(0.12, ctx.currentTime);
         gain.gain.exponentialRampToValueAtTime(0.01, ctx.currentTime + 0.07);
         osc.connect(gain);
         gain.connect(ctx.destination);
@@ -925,9 +837,7 @@
       } catch (e) {}
     }
 
-    // Authentic WhatsApp Incoming 'Tone' Sound
     function playReceiveSound() {
-      if (isMuted) return;
       try {
         const ctx = getAudioContext();
         const osc = ctx.createOscillator();
@@ -935,56 +845,13 @@
         osc.type = 'sine';
         osc.frequency.setValueAtTime(980, ctx.currentTime);
         osc.frequency.setValueAtTime(1320, ctx.currentTime + 0.08);
-        gain.gain.setValueAtTime(0.18, ctx.currentTime);
-        gain.gain.exponentialRampToValueAtTime(0.01, ctx.currentTime + 0.18);
+        gain.gain.setValueAtTime(0.14, ctx.currentTime);
+        gain.gain.exponentialRampToValueAtTime(0.01, ctx.currentTime + 0.16);
         osc.connect(gain);
         gain.connect(ctx.destination);
         osc.start();
-        osc.stop(ctx.currentTime + 0.18);
+        osc.stop(ctx.currentTime + 0.16);
       } catch (e) {}
-    }
-
-    // Mute/Unmute Audio
-    function toggleAudioMute() {
-      isMuted = !isMuted;
-      const label = document.getElementById('muteLabel');
-      const icon = document.getElementById('muteIcon');
-      if (isMuted) {
-        label.innerText = 'تشغيل الأصوات';
-        icon.setAttribute('data-lucide', 'volume-x');
-      } else {
-        label.innerText = 'كتم الأصوات';
-        icon.setAttribute('data-lucide', 'volume-2');
-      }
-      lucide.createIcons();
-      toggleHeaderMenu();
-    }
-
-    // Play Voice Greeting
-    let isPlayingGreeting = false;
-    function playGreetingAudio() {
-      const icon = document.getElementById('audioPlayIcon');
-      const durationLabel = document.getElementById('voiceDurationLabel');
-      if (isPlayingGreeting) return;
-
-      isPlayingGreeting = true;
-      icon.setAttribute('data-lucide', 'pause');
-      lucide.createIcons();
-      playReceiveSound();
-
-      let seconds = 0;
-      const interval = setInterval(() => {
-        seconds++;
-        const s = seconds < 10 ? '0' + seconds : seconds;
-        durationLabel.innerText = `0:${s}`;
-        if (seconds >= 14) {
-          clearInterval(interval);
-          isPlayingGreeting = false;
-          icon.setAttribute('data-lucide', 'play');
-          durationLabel.innerText = '0:14';
-          lucide.createIcons();
-        }
-      }, 1000);
     }
 
     // Formatting Markdown like native WhatsApp (*bold*, _italic_, ~strike~)
@@ -995,19 +862,11 @@
         .replace(/</g, '&lt;')
         .replace(/>/g, '&gt;');
       
-      // WhatsApp bold: *text* or **text**
       escaped = escaped.replace(/\*\*(.*?)\*\*/g, '<strong class="font-bold text-white">$1</strong>');
       escaped = escaped.replace(/\*([^\*\n]+)\*/g, '<strong class="font-bold text-white">$1</strong>');
-      
-      // WhatsApp italic: _text_
       escaped = escaped.replace(/_([^_]+)_/g, '<em class="italic text-gold-300">$1</em>');
-
-      // WhatsApp strikethrough: ~text~
       escaped = escaped.replace(/~([^~]+)~/g, '<del class="line-through text-slate-400">$1</del>');
-
-      // Convert linebreaks
       escaped = escaped.replace(/\n/g, '<br>');
-
       return escaped;
     }
 
@@ -1020,11 +879,11 @@
       
       if (currentLang === 'en') {
         label.innerText = 'العربية (AR)';
-        input.placeholder = 'Message...';
-        sendQuickPrompt('Hello Sultan, could you provide quotation details in English?');
+        input.placeholder = 'Message';
+        sendQuickPrompt('Hi, are rooms available for 2 nights?');
       } else {
         label.innerText = 'English (EN)';
-        input.placeholder = 'مراسلة...';
+        input.placeholder = 'Message';
         sendQuickPrompt('السلام عليكم، بدي عرض سعر للإقامة');
       }
     }
@@ -1057,8 +916,8 @@
       if (input.value.trim().length > 0) {
         submitUserChat();
       } else {
-        // Microphone Voice Note Simulation
-        simulateVoiceNoteRecord();
+        // Voice Note simulation
+        sendQuickPrompt('Hi');
       }
     }
 
@@ -1072,16 +931,7 @@
 
     function toggleEmojiDrawer() {
       const drawer = document.getElementById('emojiDrawer');
-      const attachmentMenu = document.getElementById('attachmentMenu');
-      attachmentMenu.classList.add('hidden');
       drawer.classList.toggle('hidden');
-    }
-
-    function toggleAttachmentMenu() {
-      const menu = document.getElementById('attachmentMenu');
-      const emojiDrawer = document.getElementById('emojiDrawer');
-      emojiDrawer.classList.add('hidden');
-      menu.classList.toggle('hidden');
     }
 
     function toggleHeaderMenu() {
@@ -1098,94 +948,61 @@
       document.getElementById('hotelProfileModal').classList.add('hidden');
     }
 
-    function startVoiceCall() {
-      const overlay = document.getElementById('callOverlay');
-      document.getElementById('callStatusLabel').innerText = 'جاري الاتصال... خدمة النزلاء 🇸🇦';
-      overlay.classList.remove('hidden');
-      playReceiveSound();
-    }
-
-    function startVideoCall() {
-      const overlay = document.getElementById('callOverlay');
-      document.getElementById('callStatusLabel').innerText = 'جاري بدء مكالمة الفيديو الفاخرة...';
-      overlay.classList.remove('hidden');
-      playReceiveSound();
-    }
-
-    function endCall() {
-      document.getElementById('callOverlay').classList.add('hidden');
-    }
-
     function clearChatHistory() {
       document.getElementById('dynamicMessages').innerHTML = '';
       toggleHeaderMenu();
+      showToast('تم مسح المحادثة');
     }
 
     function simulateBackClick() {
-      alert("📱 واتساب: العودة لقائمة المحادثات الرئيسية.");
+      showToast('📱 WhatsApp: العودة لقائمة الدردشات');
+    }
+
+    function showEncryptionInfo() {
+      showToast('🔒 المحادثة مشفرة تماماً بين الطرفين عبر بروتوكول Meta AI');
     }
 
     function simulateCameraSend() {
-      appendMessage('user', '📷 [صورة مرفقة من الكاميرا: صورة جواز السفر / بطاقة الهوية]');
+      appendMessage('user', '📷 [صورة مرفقة]');
       playSendSound();
-      triggerSultanReply('أشكرك على إرسال الوثيقة! تم استلام صورة الهوية بنجاح وجاري ربطها بالحجز المبدئي.');
+      triggerAIReply('أشكرك على إرسال الصورة! تم استلامها بنجاح.');
     }
 
-    // Voice Note Recording Simulation
-    function simulateVoiceNoteRecord() {
-      const actionBtn = document.getElementById('actionSendBtn');
-      actionBtn.classList.add('bg-red-600', 'recording-pulse');
-      
-      const headerStatus = document.getElementById('chatHeaderStatus');
-      const origStatus = headerStatus.innerText;
-      headerStatus.innerText = '🔴 جاري تسجيل رسالة صوتية...';
-      headerStatus.classList.add('text-red-400');
-
+    // Toast Notification Helper
+    function showToast(text) {
+      const toast = document.getElementById('toastNotification');
+      const toastText = document.getElementById('toastText');
+      toastText.innerText = text;
+      toast.classList.remove('hidden');
       setTimeout(() => {
-        actionBtn.classList.remove('bg-red-600', 'recording-pulse');
-        headerStatus.innerText = origStatus;
-        headerStatus.classList.remove('text-red-400');
-
-        // Add user audio message
-        appendUserVoiceNote();
-        playSendSound();
-
-        // Sultan AI response to voice note
-        triggerSultanReply('وعليكم السلام ورحمة الله! استمعت لرسالتك الصوتية بوضوح يا هلا والله. يسرني إفادتك بكافة التفاصيل والأسعار مباشرة!');
+        toast.classList.add('hidden');
       }, 2000);
     }
 
-    function appendUserVoiceNote() {
-      const container = document.getElementById('dynamicMessages');
-      const timeStr = new Date().toLocaleTimeString('ar-SA', { hour: '2-digit', minute: '2-digit' });
+    function copyMsgText(type, customText = '') {
+      let copyContent = customText;
+      if (type === 'welcome') {
+        copyContent = "أهلاً وسهلاً بك في فندق قصر الرياض الفاخر 🇸🇦✨ يسرنا تزويدك بعروض الأسعار وحساب إجمالي الليالي مع ضريبة القيمة المضافة 15% فورياً.";
+      }
+      navigator.clipboard.writeText(copyContent).then(() => {
+        showToast('تم نسخ نص الرسالة بنجاح! 📋');
+      }).catch(() => {
+        showToast('تم النسخ!');
+      });
+    }
 
-      const msgDiv = document.createElement('div');
-      msgDiv.className = 'flex justify-end animate-msg';
-      msgDiv.innerHTML = `
-        <div class="bg-whatsapp-outgoing bubble-outgoing rounded-2xl p-2.5 max-w-[85%] border border-white/5 shadow-whatsapp-bubble space-y-1.5 text-white">
-          <div class="flex items-center gap-2.5">
-            <button onclick="playSendSound()" class="w-8 h-8 rounded-full bg-emerald-700 flex items-center justify-center text-white shrink-0 hover:scale-105 active:scale-95 shadow">
-              <i data-lucide="play" class="w-3.5 h-3.5 fill-white ml-0.5"></i>
-            </button>
-            <div class="flex items-center gap-0.5 flex-1 h-5">
-              <div class="w-1 bg-white/70 rounded-full h-2"></div>
-              <div class="w-1 bg-white/70 rounded-full h-4"></div>
-              <div class="w-1 bg-white/70 rounded-full h-5"></div>
-              <div class="w-1 bg-white/70 rounded-full h-3"></div>
-              <div class="w-1 bg-white/70 rounded-full h-4"></div>
-              <div class="w-1 bg-white/70 rounded-full h-2"></div>
-            </div>
-            <span class="text-[9px] text-white/80 font-mono">0:04</span>
-          </div>
-          <div class="flex items-center justify-between text-[9px] text-emerald-200/80 pt-0.5">
-            <span class="flex items-center gap-1 font-mono">${timeStr}</span>
-            <span class="text-whatsapp-check font-bold tracking-tighter">✓✓</span>
-          </div>
-        </div>
-      `;
-      container.appendChild(msgDiv);
-      lucide.createIcons();
-      scrollToChatBottom();
+    function shareMsg() {
+      showToast('تم فتح قائمة المشاركة ↗');
+    }
+
+    function toggleLike(btn) {
+      btn.classList.toggle('text-emerald-400');
+      showToast('شكراً على تقييمك الإيجابي! 👍');
+    }
+
+    function toggleDislike(btn) {
+      btn.classList.toggle('text-rose-400');
+      showToast('شكراً على ملاحظتك، سنعمل على تحسين الإجابة 👎');
     }
 
     // Settings Modal
@@ -1200,7 +1017,7 @@
       const val = document.getElementById('customWebhookInput').value.trim();
       localStorage.setItem('sultan_n8n_webhook', val);
       toggleSettingsModal();
-      alert(val ? '✅ تم حفظ رابط n8n Webhook بنجاح! سيتم توجيه الرسائل إليه.' : '✅ تم تفعيل المحرك الذكي المدمج عالي السرعة.');
+      showToast(val ? '✅ تم حفظ رابط n8n Webhook بنجاح!' : '✅ تم تفعيل المحرك الذكي المدمج.');
     }
 
     // Scroll to bottom of chat
@@ -1209,62 +1026,104 @@
       scrollParent.scrollTop = scrollParent.scrollHeight;
     }
 
-    // Append Message to WhatsApp Chat
+    // Append Message to WhatsApp Chat (Matching screenshot styling exactly)
     function appendMessage(sender, rawText, cardData = null) {
       const container = document.getElementById('dynamicMessages');
-      const timeStr = new Date().toLocaleTimeString('ar-SA', { hour: '2-digit', minute: '2-digit' });
+      const now = new Date();
+      let hours = now.getHours();
+      let minutes = now.getMinutes();
+      const ampm = hours >= 12 ? 'PM' : 'AM';
+      hours = hours % 12 || 12;
+      minutes = minutes < 10 ? '0' + minutes : minutes;
+      const timeStr = `${hours}:${minutes} ${ampm}`;
+
       const formattedHTML = formatWhatsAppMarkdown(rawText);
 
       const msgDiv = document.createElement('div');
-      msgDiv.className = sender === 'user' ? 'flex justify-end animate-msg' : 'flex justify-start animate-msg';
+      msgDiv.className = sender === 'user' ? 'flex justify-end animate-msg' : 'flex flex-col items-start gap-1 animate-msg';
 
-      let innerContent = `
-        <div class="${sender === 'user' ? 'bg-whatsapp-outgoing bubble-outgoing text-white' : 'bg-whatsapp-incoming bubble-incoming text-whatsapp-text'} rounded-2xl p-3 max-w-[88%] border border-white/5 shadow-whatsapp-bubble space-y-1.5">
-          <p class="text-xs leading-relaxed whitespace-pre-line">${formattedHTML}</p>
-      `;
-
-      // If response includes interactive luxury quotation card
-      if (cardData) {
-        innerContent += `
-          <div class="mt-2.5 p-3 rounded-xl bg-black/40 border border-gold-500/40 text-right space-y-2 shadow-inner">
-            <div class="flex items-center justify-between text-[11px] font-bold text-gold-300">
-              <span class="flex items-center gap-1">📋 ${cardData.title}</span>
-              <span class="px-1.5 py-0.5 rounded bg-emerald-500/20 text-emerald-400 text-[9px] border border-emerald-500/30">متاح فوراً</span>
+      if (sender === 'user') {
+        msgDiv.innerHTML = `
+          <div class="bg-whatsapp-outgoing bubble-outgoing text-white rounded-2xl p-2.5 max-w-[85%] border border-white/5 shadow-whatsapp-bubble space-y-1">
+            <p class="text-xs leading-relaxed" dir="auto">${formattedHTML}</p>
+            <div class="flex items-center justify-end gap-1 text-[10px] text-[#8696A0] pt-0.5">
+              <span class="font-mono text-[9.5px] text-emerald-200/90">${timeStr}</span>
+              <span class="text-whatsapp-check font-bold tracking-tighter text-[11px]">✓✓</span>
             </div>
-            
-            <div class="text-[11px] text-slate-300 space-y-1 border-t border-b border-white/5 py-1.5 font-mono">
-              <div class="flex justify-between">
-                <span class="text-slate-400">سعر الليلة:</span>
-                <span>${cardData.nightlyRate}</span>
-              </div>
-              <div class="flex justify-between">
-                <span class="text-slate-400">المدة:</span>
-                <span>${cardData.nights}</span>
-              </div>
-              <div class="flex justify-between text-gold-400 font-bold">
-                <span>المجموع شامل ضريبة 15%:</span>
-                <span>${cardData.price}</span>
-              </div>
+          </div>
+        `;
+      } else {
+        // AI Message Matching Screenshot: "Meta AI:" bold label at top, then content, timestamp, action bar below
+        let bubbleContent = `
+          <div class="bg-whatsapp-incoming bubble-incoming text-slate-100 rounded-2xl p-3 max-w-[86%] border border-white/5 shadow-whatsapp-bubble space-y-1.5">
+            <div class="text-xs font-bold text-slate-100 tracking-tight">
+              Meta AI:
             </div>
+            <div class="text-xs leading-relaxed text-slate-200" dir="auto">
+              ${formattedHTML}
+            </div>
+        `;
 
-            <button onclick="confirmBooking('${cardData.room}', '${cardData.price}')" class="w-full py-2 rounded-lg bg-gradient-to-r from-gold-500 to-amber-600 hover:from-gold-400 hover:to-amber-500 text-royal-950 font-bold text-[11px] shadow transition-all active:scale-95 flex items-center justify-center gap-1.5">
-              <span>💳</span>
-              <span>${cardData.btnText || 'تأكيد الحجز المبدئي وإصدار الفاتورة'}</span>
+        // If response includes interactive luxury quotation card
+        if (cardData) {
+          bubbleContent += `
+            <div class="mt-2.5 p-3 rounded-xl bg-black/40 border border-gold-500/40 text-right space-y-2 shadow-inner">
+              <div class="flex items-center justify-between text-[11px] font-bold text-gold-300">
+                <span class="flex items-center gap-1">📋 ${cardData.title}</span>
+                <span class="px-1.5 py-0.5 rounded bg-emerald-500/20 text-emerald-400 text-[9px] border border-emerald-500/30">متاح فوراً</span>
+              </div>
+              
+              <div class="text-[11px] text-slate-300 space-y-1 border-t border-b border-white/5 py-1.5 font-mono">
+                <div class="flex justify-between">
+                  <span class="text-slate-400">سعر الليلة:</span>
+                  <span>${cardData.nightlyRate}</span>
+                </div>
+                <div class="flex justify-between">
+                  <span class="text-slate-400">المدة:</span>
+                  <span>${cardData.nights}</span>
+                </div>
+                <div class="flex justify-between text-gold-400 font-bold">
+                  <span>المجموع شامل ضريبة 15%:</span>
+                  <span>${cardData.price}</span>
+                </div>
+              </div>
+
+              <button onclick="confirmBooking('${cardData.room}', '${cardData.price}')" class="w-full py-2 rounded-lg bg-gradient-to-r from-gold-500 to-amber-600 hover:from-gold-400 hover:to-amber-500 text-royal-950 font-bold text-[11px] shadow transition-all active:scale-95 flex items-center justify-center gap-1.5">
+                <span>💳</span>
+                <span>${cardData.btnText || 'تأكيد الحجز المبدئي وإصدار الفاتورة'}</span>
+              </button>
+            </div>
+          `;
+        }
+
+        bubbleContent += `
+            <div class="flex items-center justify-end pt-0.5 text-[10px] text-[#8696A0] font-mono">
+              <span>${timeStr}</span>
+            </div>
+          </div>
+
+          <!-- Action bar below bubble (Copy, Share, Like, Dislike) -->
+          <div class="flex items-center gap-3 px-2 text-[#8696A0]">
+            <button onclick="copyMsgText('custom', \`${rawText.replace(/[`$\\]/g, '')}\`)" class="hover:text-white transition-colors" title="نسخ الرسالة">
+              <i data-lucide="copy" class="w-3.5 h-3.5"></i>
+            </button>
+            <button onclick="shareMsg()" class="hover:text-white transition-colors" title="مشاركة">
+              <i data-lucide="forward" class="w-3.5 h-3.5"></i>
+            </button>
+            <button onclick="toggleLike(this)" class="hover:text-white transition-colors" title="أعجبني">
+              <i data-lucide="thumbs-up" class="w-3.5 h-3.5"></i>
+            </button>
+            <button onclick="toggleDislike(this)" class="hover:text-white transition-colors" title="لم يعجبني">
+              <i data-lucide="thumbs-down" class="w-3.5 h-3.5"></i>
             </button>
           </div>
         `;
+
+        msgDiv.innerHTML = bubbleContent;
       }
 
-      innerContent += `
-          <div class="flex items-center justify-between pt-0.5 text-[9px] text-whatsapp-muted">
-            <span class="font-mono">${timeStr}</span>
-            ${sender === 'user' ? '<span class="text-whatsapp-check font-bold tracking-tighter">✓✓</span>' : ''}
-          </div>
-        </div>
-      `;
-
-      msgDiv.innerHTML = innerContent;
       container.appendChild(msgDiv);
+      lucide.createIcons();
       scrollToChatBottom();
     }
 
@@ -1278,28 +1137,22 @@
 
       setTimeout(() => {
         hideTypingIndicator();
-        const voucherText = `🎉 *مبروك! تم تأكيد طلب حجزك المبدئي بنجاح* 🇸🇦✨\n\n📌 *بيانات الحجز الرسمية:*\n• **رقم الحجز المرجعي:** \`${bookingRef}\`\n• **اسم النزيل:** عبدالمعز (Abdul Moiz)\n• **الجناح المحجوز:** *${roomName}*\n• **المبلغ الإجمالي:** *${priceStr}*\n• **الحالة:** مؤكد ومسجل بالنظام ✅\n\nقهوتك السعودية وتمر الخلاص بانتظارك في بهو الفندق فور وصولك! تم إرسال رابط بوابة الدفع وبطاقة الدخول الرقمية. نتشرف بخدمتك ونتمنى لك إقامة ملكية استثنائية. 👑`;
+        const voucherText = `🎉 *مبروك! تم تسجيل حجزك بنجاح في فندق قصر الرياض* 🇸🇦✨\n\n📌 *بيانات الحجز الرسمية:*\n• **رقم الحجز:** \`${bookingRef}\`\n• **اسم النزيل:** عبدالمعز (Abdul Moiz)\n• **الجناح المحجوز:** *${roomName}*\n• **المبلغ الإجمالي:** *${priceStr}*\n• **الحالة:** مؤكد ومسجل بالنظام ✅\n\nقهوتك السعودية وتمر الخلاص بانتظارك في بهو الفندق فور وصولك! تم تجهيز بطاقة الدخول الرقمية. نتشرف بخدمتك. 👑`;
         appendMessage('bot', voucherText);
         playReceiveSound();
-      }, 1200);
+      }, 1100);
     }
 
-    // Helper: Show/Hide Typing Indicator & Update Header
+    // Helper: Show/Hide Typing Indicator
     function showTypingIndicator() {
       const typing = document.getElementById('typingIndicator');
       typing.classList.remove('hidden');
-      const headerStatus = document.getElementById('chatHeaderStatus');
-      headerStatus.innerText = 'يكتب الآن...';
-      headerStatus.classList.add('text-emerald-400');
       scrollToChatBottom();
     }
 
     function hideTypingIndicator() {
       const typing = document.getElementById('typingIndicator');
       typing.classList.add('hidden');
-      const headerStatus = document.getElementById('chatHeaderStatus');
-      headerStatus.innerText = 'متصل الآن • خدمة النزلاء 🇸🇦';
-      headerStatus.classList.remove('text-emerald-400');
     }
 
     // Quick action prompt buttons
@@ -1311,9 +1164,17 @@
     }
 
     // Real Smart Natural Language & Price Calculation Engine
-    function calculateSmartSultanReply(userMsg) {
-      const text = userMsg.toLowerCase();
+    function calculateSmartAIReply(userMsg) {
+      const text = userMsg.toLowerCase().trim();
       const isEnglish = /[a-zA-Z]/.test(text) && !/[\u0600-\u06FF]/.test(text);
+
+      // Handle simple "Hi" / "Hello" exactly like screenshot
+      if (text === 'hi' || text === 'hello') {
+        return {
+          text: `Hello\n\nyes available ✨ Welcome to The Royal Riyadh Grand Hotel & Suites. How can I assist you with pricing or your stay today?`,
+          card: null
+        };
+      }
 
       // Extract Number of Nights
       let nights = 2; // Default
@@ -1342,7 +1203,7 @@
           const vat = base * 0.15;
           const total = base + vat;
           return {
-            text: `👑 *Royal Presidential Suite Quotation* 🇸🇦\n\nThank you for choosing The Royal Riyadh Grand Hotel. Here is your official quotation:\n\n• **Suite:** Royal Presidential Suite\n• **Duration:** ${nights} Night(s)\n• **Nightly Rate:** 2,800 SAR\n• **Base Total:** ${base.toLocaleString()} SAR\n• **15% Saudi VAT:** ${vat.toLocaleString()} SAR\n• **Grand Total:** **${total.toLocaleString()} SAR**\n\n✨ *VIP Royal Inclusions:*\n- 24/7 Dedicated Butler Service\n- Complimentary Mercedes Airport Chauffeur\n- Private In-Suite Jacuzzi & Panoramic Riyadh View\n- Gourmet In-Suite Breakfast\n\nShall I confirm this reservation for you?`,
+            text: `👑 *Royal Presidential Suite Quotation* 🇸🇦\n\nYes, the suite is available for your stay:\n\n• **Suite:** Royal Presidential Suite\n• **Duration:** ${nights} Night(s)\n• **Nightly Rate:** 2,800 SAR\n• **Base Total:** ${base.toLocaleString()} SAR\n• **15% Saudi VAT:** ${vat.toLocaleString()} SAR\n• **Grand Total:** **${total.toLocaleString()} SAR**\n\n✨ *VIP Royal Inclusions:*\n- 24/7 Dedicated Butler Service\n- Complimentary Mercedes Airport Chauffeur\n- Private In-Suite Jacuzzi & Panoramic Riyadh View\n- Gourmet In-Suite Breakfast\n\nWould you like to confirm this reservation?`,
             card: {
               title: `Royal Presidential Suite • ${nights} Night(s)`,
               price: `${total.toLocaleString()} SAR (Incl. 15% VAT)`,
@@ -1358,7 +1219,7 @@
           const vat = base * 0.15;
           const total = base + vat;
           return {
-            text: `🏨 *Classic Deluxe Room Quotation* 🇸🇦\n\nWelcome to The Royal Riyadh Grand Hotel. Here is your custom rate:\n\n• **Room Category:** Classic Deluxe Room\n• **Duration:** ${nights} Night(s)\n• **Nightly Rate:** 550 SAR\n• **Subtotal:** ${base.toLocaleString()} SAR\n• **15% Saudi VAT:** ${vat.toLocaleString()} SAR\n• **Grand Total:** **${total.toLocaleString()} SAR**\n\n✨ *Complimentary Perks:*\n- High-Speed Wi-Fi & Smart TV\n- Authentic Saudi Coffee & Premium Dates at Lobby\n- Access to Fitness Center & Heated Pool\n\nWould you like me to secure your booking now?`,
+            text: `🏨 *Classic Deluxe Room Quotation* 🇸🇦\n\nYes, available! Here are the quotation details:\n\n• **Room:** Classic Deluxe Room\n• **Duration:** ${nights} Night(s)\n• **Nightly Rate:** 550 SAR\n• **Subtotal:** ${base.toLocaleString()} SAR\n• **15% Saudi VAT:** ${vat.toLocaleString()} SAR\n• **Grand Total:** **${total.toLocaleString()} SAR**\n\n✨ *Complimentary Perks:*\n- High-Speed Wi-Fi & Smart TV\n- Authentic Saudi Coffee & Premium Dates at Lobby\n- Access to Fitness Center & Heated Pool\n\nReady to secure your booking?`,
             card: {
               title: `Classic Deluxe Room • ${nights} Night(s)`,
               price: `${total.toLocaleString()} SAR (Incl. 15% VAT)`,
@@ -1369,13 +1230,13 @@
             }
           };
         } else {
-          // Executive Suite (Default for English quote)
+          // Executive Suite (Default)
           const rate = 950;
           const base = rate * nights;
           const vat = base * 0.15;
           const total = base + vat;
           return {
-            text: `✨ *Executive VIP Suite Quotation* 🇸🇦\n\nGreetings from Riyadh! It is our honor to host you. Here are the reservation details:\n\n• **Category:** Executive Suite (VIP)\n• **Duration:** ${nights} Night(s)\n• **Rate:** 950 SAR / night\n• **Base Total:** ${base.toLocaleString()} SAR\n• **15% Saudi VAT:** ${vat.toLocaleString()} SAR\n• **Grand Total:** **${total.toLocaleString()} SAR**\n\n✨ *Included Privileges:*\n- Daily VIP Breakfast Buffet at Al-Nakheel\n- Full Executive Lounge Access & High Tea\n- Complimentary Valet Parking\n\nClick the button below to reserve immediately!`,
+            text: `✨ *Executive VIP Suite Quotation* 🇸🇦\n\nYes available! Here is your custom reservation quotation:\n\n• **Category:** Executive Suite (VIP)\n• **Duration:** ${nights} Night(s)\n• **Rate:** 950 SAR / night\n• **Base Total:** ${base.toLocaleString()} SAR\n• **15% Saudi VAT:** ${vat.toLocaleString()} SAR\n• **Grand Total:** **${total.toLocaleString()} SAR**\n\n✨ *Included Privileges:*\n- Daily VIP Breakfast Buffet at Al-Nakheel\n- Full Executive Lounge Access & High Tea\n- Complimentary Valet Parking\n\nClick below to confirm your booking:`,
             card: {
               title: `Executive Suite • ${nights} Night(s)`,
               price: `${total.toLocaleString()} SAR (Incl. 15% VAT)`,
@@ -1388,72 +1249,47 @@
         }
       }
 
-      // 2. Arabic Intelligent Inquiry Router
-      // A. Location & Directions
+      // 2. Arabic Intelligent Router
+      // Location
       if (text.includes('موقع') || text.includes('وين') || text.includes('فين') || text.includes('عنوان') || text.includes('مكان') || text.includes('خريطة')) {
         return {
-          text: `📍 *موقع فندق قصر الرياض الفاخر:*\n\nيقع فندقنا في أرقى أحياء العاصمة الرياض:\n• **العنوان:** طريق الملك فهد - حي العليا، الرياض.\n• **أبرز المعالم القريبة:**\n  - على بعد 3 دقائق من *مركز الملك عبدالله المالي (KAFD)*.\n  - 5 دقائق من *برج المملكة* الشهير ومجمع السنتريا.\n  - 25 دقيقة فقط من *مطار الملك خالد الدولي*.\n\nيسعدنا إرسال موقعنا عبر خرائط Google أو حجز سيارة خاصة لاستقبالك من المطار!`,
+          text: `📍 *موقع فندق قصر الرياض الفاخر:*\n\nنعم متاح ويسعدنا تشريفك:\n• **العنوان:** طريق الملك فهد - حي العليا، الرياض.\n• **أبرز المعالم القريبة:**\n  - على بعد 3 دقائق من *مركز الملك عبدالله المالي (KAFD)*.\n  - 5 دقائق من *برج المملكة* الشهير.\n  - 25 دقيقة فقط من *مطار الملك خالد الدولي*.\n\nيسعدنا حجز سيارة خاصة لاستقبالك فور وصولك!`,
           card: null
         };
       }
 
-      // B. Check-in & Check-out Times
+      // Check-in / out
       if (text.includes('دخول') || text.includes('خروج') || text.includes('مواعيد') || text.includes('وقت') || text.includes('ساعة')) {
         return {
-          text: `⏰ *مواعيد تسجيل الدخول والمغادرة في قصر الرياض:*\n\n• **تسجيل الدخول (Check-in):** يبدأ من الساعة *2:00 ظهراً*.\n• **تسجيل المغادرة (Check-out):** حتى الساعة *12:00 ظهراً*.\n\n✨ *ميزة خاصة للنزلاء:* نوفر خدمة تسجيل الوصول المبكر والمغادرة المتأخرة (Late Check-out) حتى 4:00 عصراً مجاناً حسب توفر الغرف لضيوف الأجنحة التنفيذية والملكية.`,
+          text: `⏰ *مواعيد تسجيل الدخول والمغادرة في قصر الرياض:*\n\n• **تسجيل الدخول (Check-in):** يبدأ من الساعة *2:00 ظهراً*.\n• **تسجيل المغادرة (Check-out):** حتى الساعة *12:00 ظهراً*.\n\n✨ نوفر خدمة تسجيل الوصول المبكر والمغادرة المتأخرة مجاناً لضيوف الأجنحة التنفيذية والملكية.`,
           card: null
         };
       }
 
-      // C. Pool, Spa, Wellness
+      // Pool, Spa
       if (text.includes('مسبح') || text.includes('سبا') || text.includes('حمام') || text.includes('مساج') || text.includes('جيم') || text.includes('نادي')) {
         return {
-          text: `🏊 *السبا الملكي والمرافق الصحية:*\n\nنرحب بك لتجربة استرخاء لا مثيل لها:\n• **المسبح الداخلي:** مسبح ملكي مدفأ بإطلالة سماوية مفتوح يومياً من 7:00 ص إلى 11:00 م.\n• **السبا والحمام المغربي:** جلسات مساج استرخائي على يد خبراء معتمدين.\n• **أوقات الخصوصية:** تتوفر أوقات مخصصة ومستقلة تماماً للرجال وللسيدات لضمان أعلى درجات الخصوصية.\n• **النادي الرياضي (Gym):** مجهز بأحدث أجهزة تكنوجيم ومفتوح 24 ساعة للنزلاء مجاناً.`,
+          text: `🏊 *المسبح الداخلي والسبا الملكي:*\n\nنعم، المرافق متاحة يومياً:\n• **المسبح الداخلي:** مدفأ ومفتوح من 7:00 ص إلى 11:00 م.\n• **السبا الملكي:** حمام مغربي وجلسات مساج استرخائي (أوقات مخصصة ومستقلة للرجال وللسيدات).\n• **النادي الرياضي (Gym):** مفتوح 24 ساعة مجاناً للنزلاء.`,
           card: null
         };
       }
 
-      // D. Food, Breakfast, Dining
+      // Food, Breakfast
       if (text.includes('فطور') || text.includes('افطار') || text.includes('مطعم') || text.includes('اكل') || text.includes('عشاء') || text.includes('غداء') || text.includes('قهوة')) {
         return {
-          text: `🍽️ *المطاعم والضيافة في فندق قصر الرياض:*\n\n• **مطعم النخيل الراقي:** بوفيه إفطار ملكي فاخر يومياً من *6:00 ص حتى 11:00 ص*، يضم أشهى المأكولات النجدية الأصيلة والمخبوزات الفرنسية العالمية.\n• **مجلس الضيافة السعودي:** تقديم القهوة السعودية بالهيل والزعفران مع أجود أنواع تمور الخلاص والسكري *مجاناً لجميع النزلاء والزوار* في اللوبي 24/7.\n• **خدمة الغرف:** قائمة طعام VIP متوفرة على مدار الساعة داخل غرفتك.`,
+          text: `🍽️ *المطاعم والضيافة في فندق قصر الرياض:*\n\n• **مطعم النخيل:** بوفيه إفطار ملكي فاخر يومياً من *6:00 ص حتى 11:00 ص*.\n• **مجلس الضيافة السعودي:** القهوة السعودية والتمر السكري مجاناً لجميع النزلاء في اللوبي 24/7.\n• **خدمة الغرف:** متاحة على مدار الساعة داخل الجناح.`,
           card: null
         };
       }
 
-      // E. Airport Transfer
-      if (text.includes('مطار') || text.includes('توصيل') || text.includes('استقبال') || text.includes('ليموزين') || text.includes('سيارة')) {
-        return {
-          text: `✈️ *خدمة النقل والتوصيل من مطار الملك خالد الدولي:*\n\n• **أسطول فاخر:** سيارات مرسيدس S-Class وBMW الفئة السابعة مع سائق خاص يتحدث العربية والإنجليزية.\n• **لنزلاء الجناح الملكي:** خدمة الاستقبال والتوديع *مجانية بالكامل* ذهاباً وإياباً.\n• **لباقي الغرف والأجنحة:** تتوفر الخدمة برسم رمزي (150 ر.س للرحلة).\n\nبإمكانك تزويدنا برقم رحلتك الجوية لنكون باستقبالك فور هبوط الطائرة!`,
-          card: null
-        };
-      }
-
-      // F. Discounts & Offers
-      if (text.includes('خصم') || text.includes('عرض') || text.includes('تخفيض') || text.includes('كود') || text.includes('ارخص')) {
-        return {
-          text: `🎁 *العروض والخصومات الخاصة بفندق قصر الرياض:*\n\nيسرنا تقديم كود خصم حصري للضيوف الكرام:\n🏷️ كود الخصم: **\`RIYADH2026\`**\n• يمنحك خصماً فورياً بقيمة **10%** على إجمالي الفاتورة عند الحجز لمدة ليلتين فأكثر.\n• يشمل ترقية مجانية للغرفة (حسب الإمكانية عند الوصول).\n• بوفيه إفطار مجاني إضافي لشخص واحد.`,
-          card: null
-        };
-      }
-
-      // G. Payment & Cancellation Policy
-      if (text.includes('دفع') || text.includes('الغاء') || text.includes('إلغاء') || text.includes('فيزا') || text.includes('مدى') || text.includes('كاش')) {
-        return {
-          text: `💳 *طرق الدفع وسياسة الإلغاء المرنة:*\n\n• **طرق الدفع المعتمدة:** بطاقات مدى (Mada)، فيزا (Visa)، ماستركارد، أبل باي (Apple Pay)، بالإضافة لإمكانية الدفع عند الوصول للاستقبال.\n• **سياسة الإلغاء:** إلغاء مجاني ومرن 100% حتى 24 ساعة قبل تاريخ الوصول المحدد دون أي رسوم إضافية.`,
-          card: null
-        };
-      }
-
-      // H. Room Quotations (Calculated Dynamically!)
-      // 1) Classic Room (550 SAR)
+      // Classic Room (550 SAR)
       if (text.includes('كلاسيك') || text.includes('غرفة') || text.includes('550') || text.includes('شخصين')) {
         const rate = 550;
         const base = rate * nights;
         const vat = base * 0.15;
         const total = base + vat;
         return {
-          text: `يا هلا بالضيف الكريم! 🇸🇦 يسعدنا استضافتك في فندق قصر الرياض الفاخر.\n\n📋 *عرض سعر رسمي - الغرفة الكلاسيكية الفاخرة:*\n• **نوع الإقامة:** الغرفة الكلاسيكية (Deluxe Room)\n• **المدة المطلوبة:** ${nights} ليالي\n• **سعر الليلة:** 550 ر.س\n• **المبلغ الأساسي:** ${base.toLocaleString()} ر.س\n• **ضريبة القيمة المضافة (15%):** ${vat.toLocaleString()} ر.س\n• **المجموع الإجمالي شامل الضريبة:** **${total.toLocaleString()} ر.س**\n\n✨ *المزايا والخدمات المجانية:*\n- سرير كينغ فاخر مع إطلالة هادئة على مدينة الرياض\n- إنترنت ألياف بصرية فائق السرعة مجاناً\n- ضيافة القهوة السعودية والتمر في اللوبي 24 ساعة\n- دخول مجاني للنادي الصحي والمسبح الداخلي\n\nهل ترغب بتأكيد الحجز فورياً؟ اضغط الزر بالأسفل.`,
+          text: `يا هلا والله! 🇸🇦 نعم الغرف متاحة.\n\n📋 *عرض سعر رسمي - الغرفة الكلاسيكية الفاخرة:*\n• **نوع الإقامة:** الغرفة الكلاسيكية (Deluxe Room)\n• **المدة المطلوبة:** ${nights} ليالي\n• **سعر الليلة:** 550 ر.س\n• **المبلغ الأساسي:** ${base.toLocaleString()} ر.س\n• **ضريبة القيمة المضافة (15%):** ${vat.toLocaleString()} ر.س\n• **المجموع الإجمالي شامل الضريبة:** **${total.toLocaleString()} ر.س**\n\n✨ *المزايا المجانية:*\n- سرير كينغ فاخر مع إطلالة على مدينة الرياض\n- إنترنت ألياف بصرية فائق السرعة مجاناً\n- ضيافة القهوة السعودية والتمر في اللوبي 24 ساعة\n- دخول مجاني للنادي الصحي والمسبح الداخلي\n\nهل ترغب بتأكيد الحجز فورياً؟ اضغط الزر بالأسفل:`,
           card: {
             title: `الغرفة الكلاسيكية • ${nights} ليالي`,
             price: `${total.toLocaleString()} ر.س (شامل الضريبة 15%)`,
@@ -1465,14 +1301,14 @@
         };
       }
 
-      // 2) Royal Presidential Suite (2,800 SAR)
+      // Royal Suite (2,800 SAR)
       if (text.includes('ملكي') || text.includes('رئاسي') || text.includes('2800') || text.includes('الملكي')) {
         const rate = 2800;
         const base = rate * nights;
         const vat = base * 0.15;
         const total = base + vat;
         return {
-          text: `أهلاً بك في قمة الفخامة والجاه الملكي! 👑🇸🇦\n\n📋 *عرض سعر رسمي - الجناح الملكي الرئاسي VIP:*\n• **نوع الجناح:** الجناح الملكي الرئاسي (Royal Suite)\n• **المدة المطلوبة:** ${nights} ليالي\n• **سعر الليلة:** 2,800 ر.س\n• **المبلغ الأساسي:** ${base.toLocaleString()} ر.س\n• **ضريبة القيمة المضافة (15%):** ${vat.toLocaleString()} ر.س\n• **المجموع الإجمالي النهائي:** **${total.toLocaleString()} ر.س**\n\n✨ *الخدمات الملكية الحصرية المشمولة:*\n- خدمة كبير الخدم الخاص (Private Butler) على مدار 24 ساعة\n- استقبال وتوديع مجاني بسيارة مرسيدس S-Class من مطار الملك خالد\n- إطلالة بانورامية كاملة 360 درجة وجاكوزي ملكي خاص\n- إفطار بوفيه فاخر يُقدم يومياً داخل الجناح\n\nيشرفنا خدمتكم على أرقى المستويات. لتأكيد الحجز فوراً اضغط بالأسفل:`,
+          text: `أهلاً بك في قمة الفخامة! 👑🇸🇦 الجناح الملكي متاح:\n\n📋 *عرض سعر رسمي - الجناح الملكي الرئاسي VIP:*\n• **نوع الجناح:** الجناح الملكي الرئاسي (Royal Suite)\n• **المدة المطلوبة:** ${nights} ليالي\n• **سعر الليلة:** 2,800 ر.س\n• **المبلغ الأساسي:** ${base.toLocaleString()} ر.س\n• **ضريبة القيمة المضافة (15%):** ${vat.toLocaleString()} ر.س\n• **المجموع الإجمالي النهائي:** **${total.toLocaleString()} ر.س**\n\n✨ *المزايا الملكية الحصرية:*\n- خادم شخصي (Butler) على مدار 24 ساعة\n- استقبال وتوديع مجاني بسيارة مرسيدس S-Class من مطار الملك خالد\n- جاكوزي خاص وإطلالة بانورامية كاملة 360 درجة\n- إفطار بوفيه فاخر يُقدم يومياً داخل الجناح\n\nلتأكيد الحجز اضغط بالأسفل:`,
           card: {
             title: `الجناح الملكي الرئاسي • ${nights} ليالي`,
             price: `${total.toLocaleString()} ر.س (شامل الضريبة)`,
@@ -1484,14 +1320,14 @@
         };
       }
 
-      // 3) Executive VIP Suite (950 SAR) - Default or specific
-      if (text.includes('تنفيذي') || text.includes('تنفيذيه') || text.includes('vip') || text.includes('950') || text.includes('سعر') || text.includes('حجز')) {
+      // Executive Suite (950 SAR) - Default or specific
+      if (text.includes('تنفيذي') || text.includes('تنفيذيه') || text.includes('vip') || text.includes('950') || text.includes('سعر') || text.includes('حجز') || text.includes('عرض')) {
         const rate = 950;
         const base = rate * nights;
         const vat = base * 0.15;
         const total = base + vat;
         return {
-          text: `أهلاً وسهلاً بك يا هلا! حياك الله في فندق قصر الرياض الفاخر 🇸🇦✨\n\n📋 *عرض سعر رسمي - الجناح التنفيذي الفاخر (VIP):*\n• **نوع الجناح:** الجناح التنفيذي (Executive Suite)\n• **المدة المقترحة:** ${nights} ليالي\n• **سعر الليلة:** 950 ر.س\n• **المبلغ الأساسي:** ${base.toLocaleString()} ر.س\n• **ضريبة القيمة المضافة (15%):** ${vat.toLocaleString()} ر.س\n• **المجموع الإجمالي شامل الضريبة:** **${total.toLocaleString()} ر.س**\n\n✨ *المزايا المشمولة مجاناً:*\n- بوفيه إفطار فاخر يومياً لشخصين في مطعم النخيل\n- دخول مجاني للصالة التنفيذية (Executive Lounge) وتقديم شاي المساء\n- مواقف خاصة مجانية وخدمة صف السيارات (Valet Parking)\n- تسجيل مغادرة متأخر حتى 4:00 عصراً مجاناً\n\nبإمكانك تأكيد الحجز مباشرة بضغطة زر أدناه:`,
+          text: `أهلاً وسهلاً بك! حياك الله في فندق قصر الرياض 🇸🇦✨ نعم الأجنحة متاحة:\n\n📋 *عرض سعر رسمي - الجناح التنفيذي الفاخر (VIP):*\n• **نوع الجناح:** الجناح التنفيذي (Executive Suite)\n• **المدة المقترحة:** ${nights} ليالي\n• **سعر الليلة:** 950 ر.س\n• **المبلغ الأساسي:** ${base.toLocaleString()} ر.س\n• **ضريبة القيمة المضافة (15%):** ${vat.toLocaleString()} ر.س\n• **المجموع الإجمالي شامل الضريبة:** **${total.toLocaleString()} ر.س**\n\n✨ *المزايا المشمولة مجاناً:*\n- بوفيه إفطار فاخر يومياً لشخصين في مطعم النخيل\n- دخول مجاني للصالة التنفيذية (Executive Lounge)\n- مواقف خاصة مجانية وخدمة صف السيارات (Valet Parking)\n- تسجيل مغادرة متأخر حتى 4:00 عصراً مجاناً\n\nبإمكانك تأكيد الحجز فورياً بالضغط أدناه:`,
           card: {
             title: `الجناح التنفيذي • ${nights} ليالي`,
             price: `${total.toLocaleString()} ر.س (شامل الضريبة 15%)`,
@@ -1503,15 +1339,15 @@
         };
       }
 
-      // I. General Greetings / Default Fallback
+      // General fallback
       return {
-        text: `وعليكم السلام ورحمة الله وبركاته! يا هلا والله ومرحباً بك في فندق قصر الرياض الفاخر 🇸🇦✨\n\nأنا **"سلطان"** في خدمتك دائماً. يسرني إفادتك بأسعار الغرف والأجنحة المعتمدة لدينا:\n\n1. **الغرفة الكلاسيكية:** 550 ر.س / ليلة\n2. **الجناح التنفيذي (VIP):** 950 ر.س / ليلة (شامل إفطار الصالة)\n3. **الجناح الملكي الرئاسي:** 2,800 ر.س / ليلة (مع سائق مرسيدس وخادم خاص)\n\nأخبرني بعدد الليالي أو نوع الجناح المفضل لأحسب لك التكلفة مع ضريبة 15% فورياً! ✨`,
+        text: `وعليكم السلام ورحمة الله! يا هلا والله ومرحباً بك في فندق قصر الرياض 🇸🇦✨\n\nيسرني تزويدك بأسعار غرفنا وأجنحتنا المتاحة:\n\n1. **الغرفة الكلاسيكية:** 550 ر.س / ليلة\n2. **الجناح التنفيذي (VIP):** 950 ر.س / ليلة (شامل إفطار الصالة)\n3. **الجناح الملكي الرئاسي:** 2,800 ر.س / ليلة (مع سائق مرسيدس وخادم خاص)\n\nأخبرني بعدد الليالي أو نوع الجناح المفضل لأحسب لك التكلفة مع ضريبة 15% فورياً! ✨`,
         card: null
       };
     }
 
-    // Trigger Sultan Reply with Realistic Delay & Typing Status
-    function triggerSultanReply(forcedText = null) {
+    // Trigger AI Reply with Realistic Delay
+    function triggerAIReply(forcedText = null) {
       showTypingIndicator();
 
       const webhookUrl = localStorage.getItem('sultan_n8n_webhook');
@@ -1552,10 +1388,10 @@
         }
 
         // Smart Built-in Engine
-        const reply = calculateSmartSultanReply(lastUserMsg);
+        const reply = calculateSmartAIReply(lastUserMsg);
         appendMessage('bot', reply.text, reply.card);
         playReceiveSound();
-      }, 1000);
+      }, 950);
     }
 
     // Submit user message
@@ -1564,7 +1400,6 @@
       const val = input.value.trim();
       if (!val) return;
 
-      // Save last text for processor
       window.lastUserMessageText = val;
 
       // 1. Add User Message
@@ -1573,12 +1408,11 @@
       input.value = '';
       handleInputChange(input);
 
-      // Close open drawers
+      // Close open drawer
       document.getElementById('emojiDrawer').classList.add('hidden');
-      document.getElementById('attachmentMenu').classList.add('hidden');
 
-      // 2. Trigger Sultan AI response
-      triggerSultanReply();
+      // 2. Trigger AI response
+      triggerAIReply();
     }
   </script>
 </body>
