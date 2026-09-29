@@ -408,7 +408,10 @@
                 <!-- Initial Entering Message (Authentic WhatsApp Message Style) -->
                 <div id="initialEnteringMessage" class="flex justify-start">
                   <div class="bg-whatsapp-incoming bubble-incoming rounded-2xl p-2.5 px-3.5 max-w-[85%] border border-white/5 shadow-whatsapp-bubble text-slate-100">
-                    <p class="text-[13px] leading-relaxed text-[#E9EDEF]">Greetings</p>
+                    <p class="text-[13px] leading-relaxed text-[#E9EDEF]">
+                      Welcome to The Royal Riyadh Grand Hotel 🇸🇦. It is our honor and pleasure to serve you.
+                      <span class="block mt-1.5" dir="rtl">كم عدد الليالي التي ستقيمون فيها معنا (أو ما هي تواريخ الوصول والمغادرة)؟</span>
+                    </p>
                   </div>
                 </div>
 
@@ -938,7 +941,7 @@
     function copyMsgText(type, customText = '') {
       let copyContent = customText;
       if (type === 'welcome') {
-        copyContent = "Greetings";
+        copyContent = "Welcome to The Royal Riyadh Grand Hotel 🇸🇦. It is our honor and pleasure to serve you.\nكم عدد الليالي التي ستقيمون فيها معنا (أو ما هي تواريخ الوصول والمغادرة)؟";
       }
       navigator.clipboard.writeText(copyContent).then(() => {
         showToast('تم نسخ نص الرسالة بنجاح! 📋');
